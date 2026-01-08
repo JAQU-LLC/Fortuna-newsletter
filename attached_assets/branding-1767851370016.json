@@ -1,0 +1,66 @@
+{
+  "colorScheme": "light",
+  "fonts": [
+    {
+      "family": "Inter",
+      "count": 13
+    },
+    {
+      "family": "sans-serif",
+      "count": 13
+    }
+  ],
+  "colors": {
+    "primary": "#484DFF",
+    "accent": "#0A083B",
+    "background": "#FFFFFF",
+    "textPrimary": "#0A083B",
+    "link": "#0A083B"
+  },
+  "typography": {
+    "fontFamilies": {
+      "primary": "Inter",
+      "heading": "Inter"
+    },
+    "fontStacks": {
+      "body": [
+        "Inter",
+        "sans-serif"
+      ],
+      "heading": [
+        "Inter",
+        "sans-serif"
+      ],
+      "paragraph": [
+        "Inter",
+        "sans-serif"
+      ]
+    },
+    "fontSizes": {
+      "h1": "72px",
+      "h2": "72px",
+      "body": "20px"
+    }
+  },
+  "spacing": {
+    "baseUnit": 4,
+    "borderRadius": "10px"
+  },
+  "components": {},
+  "images": {
+    "logo": "File saved at: attached_assets/logo.png",
+    "favicon": "File saved at: attached_assets/favicon.png",
+    "ogImage": null
+  },
+  "__framework_hints": [],
+  "__llm_logo_reasoning": {
+    "selectedIndex": 0,
+    "reasoning": "Strong indicators: in header, header location, visible, highest logo on page, alt matches logo/brand, class contains logo, alt contains brand name \"Fortuna.ai\", src contains brand name \"Fortuna.ai\", reasonable size. Score: 108 (clear winner by 108 points)",
+    "confidence": 0.9
+  },
+  "confidence": {
+    "buttons": 0,
+    "colors": 0,
+    "overall": 0
+  }
+}
