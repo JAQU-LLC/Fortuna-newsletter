@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { useStore } from "./lib/store";
 import Home from "@/pages/home";
 import Posts from "@/pages/posts";
+import Payment from "@/pages/payment";
 import AdminLogin from "@/pages/admin-login";
 import AdminDashboard from "@/pages/admin-dashboard";
 import NotFound from "@/pages/not-found";
@@ -25,7 +26,10 @@ function Router() {
   return (
     <Switch>
       <Route path="/">
-        <Home onSubscribe={addSubscriber} />
+        <Home />
+      </Route>
+      <Route path="/payment">
+        <Payment />
       </Route>
       <Route path="/posts">
         <Posts posts={posts} />
