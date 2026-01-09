@@ -83,7 +83,7 @@ export default function Home() {
             {plans.map((plan) => (
               <div
                 key={plan.id}
-                className={`relative rounded-2xl border p-8 text-left transition-all ${
+                className={`relative rounded-2xl border p-8 text-left transition-all flex flex-col ${
                   plan.popular
                     ? 'border-primary bg-primary/5 shadow-xl scale-105'
                     : 'border-border bg-card hover:border-primary/30'
@@ -107,7 +107,7 @@ export default function Home() {
                     {plan.description}
                   </p>
                 </div>
-                <ul className="space-y-3 mb-8">
+                <ul className="space-y-3 mb-8 flex-grow">
                   {plan.features.map((feature, idx) => (
                     <li key={idx} className="flex items-center gap-3 text-sm">
                       <Check className="w-4 h-4 text-primary flex-shrink-0" />
@@ -117,7 +117,7 @@ export default function Home() {
                 </ul>
                 <Button
                   onClick={() => handleSelectPlan(plan.id)}
-                  className={`w-full h-12 rounded-xl font-semibold ${
+                  className={`w-full h-12 rounded-xl font-semibold mt-auto ${
                     plan.popular ? '' : 'bg-secondary hover:bg-secondary/90'
                   }`}
                   variant={plan.popular ? 'default' : 'secondary'}
