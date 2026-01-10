@@ -1,0 +1,244 @@
+{
+  "home": {
+    "badge": "AI-Powered trading Insights for US Stocks",
+    "title": "Gain a trading edge with",
+    "titleBrand": "Fortuna.ai",
+    "description": "",
+    "plans": {
+      "free": {
+        "name": "Free",
+        "price": "$0",
+        "period": "/month",
+        "description": "Get started with trading alerts",
+        "features": [
+          "Weekly newsletter",
+          "Access to public posts",
+          "Discord access in public channels"
+        ],
+        "cta": "Get Started"
+      },
+      "standard": {
+        "name": "Standard",
+        "price": "$0",
+        "period": "/month",
+        "description": "For trading enthusiasts who want to gain a trading edge",
+        "features": [
+          "Everything in Free",
+          "Daily newsletter",
+          "Discord access in certain private channels"
+        ],
+        "cta": "Subscribe"
+      },
+      "premium": {
+        "name": "Premium",
+        "price": "$0",
+        "period": "/month",
+        "description": "Full on access to everything",
+        "features": [
+          "Everything in Standard",
+          "Discord access to all channels",
+          "AI agents to analyze stock / market trends"
+        ],
+        "cta": "Go Premium"
+      }
+    },
+    "mostPopular": "Most Popular"
+  },
+  "posts": {
+    "title": "Latest Posts",
+    "description": "Explore our collection of AI insights, industry analysis, and practical guides.",
+    "readMore": "Read more",
+    "noPosts": "No posts yet. Check back soon!",
+    "backToPosts": "Back to Posts"
+  },
+  "payment": {
+    "backToPlans": "Back to plans",
+    "title": "Complete your subscription",
+    "labels": {
+      "fullName": "Full Name",
+      "email": "Email",
+      "paymentDetails": "Payment Details",
+      "cardNumber": "Card Number",
+      "expiry": "Expiry",
+      "cvc": "CVC"
+    },
+    "placeholders": {
+      "name": "John Smith",
+      "email": "john@example.com",
+      "cardNumber": "4242 4242 4242 4242",
+      "expiry": "MM/YY",
+      "cvc": "123"
+    },
+    "buttons": {
+      "processing": "Processing...",
+      "startFreePlan": "Start Free Plan",
+      "subscribe": "Pay {{price}}"
+    },
+    "secureCheckout": "Secure checkout powered by Stripe",
+    "orderSummary": {
+      "title": "Order Summary",
+      "monthlySubscription": "Monthly subscription",
+      "total": "Total"
+    },
+    "success": {
+      "title": "Welcome to Fortuna.ai!",
+      "message": "Welcome, {{username}}! Your {{planName}} subscription is now active. Check your email for confirmation.",
+      "viewPosts": "View Posts"
+    },
+    "planDetails": {
+      "free": {
+        "name": "Free",
+        "price": "$0/month",
+        "features": [
+          "Weekly newsletter",
+          "Access to public posts",
+          "Community updates"
+        ]
+      },
+      "standard": {
+        "name": "Standard",
+        "price": "$9/month",
+        "features": [
+          "Daily AI briefings",
+          "Exclusive analysis",
+          "Monthly webinars"
+        ]
+      },
+      "premium": {
+        "name": "Premium",
+        "price": "$29/month",
+        "features": [
+          "Private Discord",
+          "1-on-1 calls",
+          "Custom research",
+          "Team seats"
+        ]
+      }
+    },
+    "messages": {
+      "fillRequiredFields": "Please fill in all required fields",
+      "enterPaymentDetails": "Please enter payment details",
+      "subscriptionSuccessful": "Subscription successful!",
+      "subscriptionSuccessDescription": "You're now on the {{planName}} plan."
+    }
+  },
+  "admin": {
+    "login": {
+      "backToHome": "Back to home",
+      "title": "Admin Login",
+      "description": "Sign in to access the admin dashboard",
+      "labels": {
+        "username": "Username",
+        "password": "Password"
+      },
+      "placeholders": {
+        "username": "Enter username",
+        "password": "Enter password"
+      },
+      "signIn": "Sign In",
+      "restricted": "This area is restricted to administrators only.",
+      "messages": {
+        "welcomeBack": "Welcome back!",
+        "loggedInAsAdmin": "You are now logged in as admin.",
+        "invalidCredentials": "Invalid credentials",
+        "checkCredentials": "Please check your username and password."
+      }
+    },
+    "dashboard": {
+      "title": "Admin Dashboard",
+      "viewSite": "View Site",
+      "logout": "Logout",
+      "stats": {
+        "totalSubscribers": "Total Subscribers",
+        "activeSubscribers": "Active Subscribers",
+        "publishedPosts": "Published Posts"
+      },
+      "tabs": {
+        "write": "Write Post",
+        "users": "Subscribers",
+        "plans": "Plan Settings"
+      },
+      "plans": {
+        "title": "Plan Configuration",
+        "mostPopular": "Most Popular Plan",
+        "disabledPlans": "Disabled Plans",
+        "save": "Save Plan Settings",
+        "saved": "Plan settings saved successfully!",
+        "plans": {
+          "free": "Free",
+          "standard": "Standard",
+          "premium": "Premium"
+        }
+      },
+      "writePost": {
+        "title": "Create New Post",
+        "labels": {
+          "postTitle": "Post Title",
+          "postContent": "Post Content"
+        },
+        "placeholders": {
+          "title": "Enter post title...",
+          "content": "Write your post content here..."
+        },
+        "publish": "Publish Post",
+        "messages": {
+          "fillAllFields": "Please fill in all fields",
+          "postPublished": "Post published!",
+          "postLive": "Your post is now live."
+        }
+      },
+      "subscribers": {
+        "title": "Manage Subscribers",
+        "searchPlaceholder": "Search by email...",
+        "table": {
+          "name": "Name",
+          "email": "Email",
+          "subscribed": "Subscribed",
+          "status": "Status",
+          "action": "Action"
+        },
+        "status": {
+          "active": "Active",
+          "inactive": "Inactive"
+        },
+        "actions": {
+          "activate": "Activate",
+          "deactivate": "Deactivate"
+        },
+        "noResults": "No subscribers found matching your search."
+      }
+    }
+  },
+  "common": {
+    "nav": {
+      "subscribe": "Subscribe",
+      "posts": "Posts"
+    },
+    "buttons": {
+      "back": "Back"
+    },
+    "comingSoon": "Coming Soon"
+  },
+  "footer": {
+    "social": {
+      "linkedin": "LinkedIn",
+      "instagram": "Instagram",
+      "creator": "Creator"
+    },
+    "legal": {
+      "privacyPolicy": "Privacy Policy",
+      "termsOfUse": "Terms of Use"
+    },
+    "copyright": "© 2026 Fortuna.ai. All rights reserved."
+  },
+  "notFound": {
+    "title": "404 Page Not Found",
+    "message": "Sorry, this page does not exist."
+  },
+  "postDetail": {
+    "backToPosts": "Back to Posts",
+    "notFound": "Post not found",
+    "notFoundMessage": "The post you are looking for does not exist."
+  }
+}
+

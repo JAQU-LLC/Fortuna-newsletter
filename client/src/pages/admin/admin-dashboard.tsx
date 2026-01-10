@@ -15,10 +15,15 @@ import {
   UserCheck,
   Send,
   Home,
+  Settings,
 } from 'lucide-react';
 import { Subscriber, Post } from '@/lib/store';
 import { format } from 'date-fns';
 import logoUrl from '@assets/logo.png';
+import { useTranslation } from 'react-i18next';
+import { getPlanConfig, setPlanConfig, type PlanId, type PlanConfig } from '@/lib/planConfig';
+import { Checkbox } from '@/components/ui/checkbox';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 
 interface AdminDashboardProps {
   isAdmin: boolean;
@@ -42,6 +47,8 @@ export default function AdminDashboard({
   const [postTitle, setPostTitle] = useState('');
   const [postContent, setPostContent] = useState('');
   const { toast } = useToast();
+  const { t } = useTranslation();
+  const [planConfig, setPlanConfigState] = useState<PlanConfig>(getPlanConfig());
 
   if (!isAdmin) {
     setLocation('/admin');
@@ -53,11 +60,11 @@ export default function AdminDashboard({
       sub.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
       sub.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
-
+  
   const handlePublishPost = () => {
     if (!postTitle.trim() || !postContent.trim()) {
       toast({
-        title: 'Please fill in all fields',
+        title: t('admin.dashboard.writePost.messages.fillAllFields'),
         variant: 'destructive',
       });
       return;
@@ -66,14 +73,34 @@ export default function AdminDashboard({
     setPostTitle('');
     setPostContent('');
     toast({
-      title: 'Post published!',
-      description: 'Your post is now live.',
+      title: t('admin.dashboard.writePost.messages.postPublished'),
+      description: t('admin.dashboard.writePost.messages.postLive'),
     });
   };
 
   const handleLogout = () => {
     onLogout();
     setLocation('/');
+  };
+
+  const handlePlanConfigChange = (newConfig: PlanConfig) => {
+    setPlanConfigState(newConfig);
+    setPlanConfig(newConfig);
+    toast({
+      title: t('admin.dashboard.plans.saved'),
+      description: 'Plan settings have been updated.',
+    });
+  };
+
+  const handleMostPopularChange = (planId: PlanId | null) => {
+    handlePlanConfigChange({ ...planConfig, mostPopular: planId });
+  };
+
+  const handleDisabledPlansChange = (planId: PlanId, disabled: boolean) => {
+    const disabledPlans = disabled
+      ? [...planConfig.disabledPlans, planId]
+      : planConfig.disabledPlans.filter(id => id !== planId);
+    handlePlanConfigChange({ ...planConfig, disabledPlans });
   };
 
   const activeCount = subscribers.filter((s) => s.active).length;
@@ -84,7 +111,7 @@ export default function AdminDashboard({
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <img src={logoUrl} alt="Fortuna.ai" className="h-7 w-auto" />
-            <span className="text-sm opacity-70">Admin Dashboard</span>
+            <span className="text-sm opacity-70">{t('admin.dashboard.title')}</span>
           </div>
           <div className="flex items-center gap-4">
             <Link
@@ -93,7 +120,7 @@ export default function AdminDashboard({
               data-testid="link-view-site"
             >
               <Home className="w-4 h-4" />
-              View Site
+              {t('admin.dashboard.viewSite')}
             </Link>
             <Button
               variant="ghost"
@@ -103,7 +130,7 @@ export default function AdminDashboard({
               data-testid="button-logout"
             >
               <LogOut className="w-4 h-4 mr-2" />
-              Logout
+              {t('admin.dashboard.logout')}
             </Button>
           </div>
         </div>
@@ -113,7 +140,7 @@ export default function AdminDashboard({
         <div className="grid md:grid-cols-3 gap-6 mb-8">
           <div className="bg-card rounded-xl border border-border p-6">
             <div className="text-sm text-muted-foreground mb-1">
-              Total Subscribers
+              {t('admin.dashboard.stats.totalSubscribers')}
             </div>
             <div className="text-3xl font-display font-bold" data-testid="text-total-subscribers">
               {subscribers.length}
@@ -121,7 +148,7 @@ export default function AdminDashboard({
           </div>
           <div className="bg-card rounded-xl border border-border p-6">
             <div className="text-sm text-muted-foreground mb-1">
-              Active Subscribers
+              {t('admin.dashboard.stats.activeSubscribers')}
             </div>
             <div className="text-3xl font-display font-bold text-green-600" data-testid="text-active-subscribers">
               {activeCount}
@@ -129,7 +156,7 @@ export default function AdminDashboard({
           </div>
           <div className="bg-card rounded-xl border border-border p-6">
             <div className="text-sm text-muted-foreground mb-1">
-              Published Posts
+              {t('admin.dashboard.stats.publishedPosts')}
             </div>
             <div className="text-3xl font-display font-bold text-primary" data-testid="text-total-posts">
               {posts.filter((p) => p.published).length}
@@ -145,7 +172,7 @@ export default function AdminDashboard({
               data-testid="tab-write"
             >
               <PenSquare className="w-4 h-4 mr-2" />
-              Write Post
+              {t('admin.dashboard.tabs.write')}
             </TabsTrigger>
             <TabsTrigger
               value="users"
@@ -153,24 +180,32 @@ export default function AdminDashboard({
               data-testid="tab-users"
             >
               <Users className="w-4 h-4 mr-2" />
-              Subscribers
+              {t('admin.dashboard.tabs.users')}
+            </TabsTrigger>
+            <TabsTrigger
+              value="plans"
+              className="px-6 py-3 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-lg"
+              data-testid="tab-plans"
+            >
+              <Settings className="w-4 h-4 mr-2" />
+              {t('admin.dashboard.tabs.plans')}
             </TabsTrigger>
           </TabsList>
 
           <TabsContent value="write" className="mt-6">
             <div className="bg-card rounded-xl border border-border p-8">
               <h2 className="font-display text-xl font-semibold mb-6">
-                Create New Post
+                {t('admin.dashboard.writePost.title')}
               </h2>
               <div className="space-y-6">
                 <div className="space-y-2">
                   <Label htmlFor="title" className="text-sm font-medium">
-                    Post Title
+                    {t('admin.dashboard.writePost.labels.postTitle')}
                   </Label>
                   <Input
                     id="title"
                     type="text"
-                    placeholder="Enter post title..."
+                    placeholder={t('admin.dashboard.writePost.placeholders.title')}
                     value={postTitle}
                     onChange={(e) => setPostTitle(e.target.value)}
                     className="h-12 px-4 rounded-xl"
@@ -179,11 +214,11 @@ export default function AdminDashboard({
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="content" className="text-sm font-medium">
-                    Post Content
+                    {t('admin.dashboard.writePost.labels.postContent')}
                   </Label>
                   <Textarea
                     id="content"
-                    placeholder="Write your post content here..."
+                    placeholder={t('admin.dashboard.writePost.placeholders.content')}
                     value={postContent}
                     onChange={(e) => setPostContent(e.target.value)}
                     className="min-h-[300px] px-4 py-3 rounded-xl resize-none"
@@ -196,7 +231,7 @@ export default function AdminDashboard({
                   data-testid="button-publish"
                 >
                   <Send className="w-4 h-4 mr-2" />
-                  Publish Post
+                  {t('admin.dashboard.writePost.publish')}
                 </Button>
               </div>
             </div>
@@ -206,13 +241,13 @@ export default function AdminDashboard({
             <div className="bg-card rounded-xl border border-border p-8">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="font-display text-xl font-semibold">
-                  Manage Subscribers
+                  {t('admin.dashboard.subscribers.title')}
                 </h2>
                 <div className="relative w-80">
                   <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                   <Input
                     type="search"
-                    placeholder="Search by email..."
+                    placeholder={t('admin.dashboard.subscribers.searchPlaceholder')}
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="pl-11 h-11 rounded-xl"
@@ -226,19 +261,19 @@ export default function AdminDashboard({
                   <thead className="bg-muted/50">
                     <tr>
                       <th className="text-left px-6 py-4 text-sm font-semibold">
-                        Name
+                        {t('admin.dashboard.subscribers.table.name')}
                       </th>
                       <th className="text-left px-6 py-4 text-sm font-semibold">
-                        Email
+                        {t('admin.dashboard.subscribers.table.email')}
                       </th>
                       <th className="text-left px-6 py-4 text-sm font-semibold">
-                        Subscribed
+                        {t('admin.dashboard.subscribers.table.subscribed')}
                       </th>
                       <th className="text-left px-6 py-4 text-sm font-semibold">
-                        Status
+                        {t('admin.dashboard.subscribers.table.status')}
                       </th>
                       <th className="text-right px-6 py-4 text-sm font-semibold">
-                        Action
+                        {t('admin.dashboard.subscribers.table.action')}
                       </th>
                     </tr>
                   </thead>
@@ -267,7 +302,7 @@ export default function AdminDashboard({
                             }`}
                             data-testid={`status-subscriber-${subscriber.id}`}
                           >
-                            {subscriber.active ? 'Active' : 'Inactive'}
+                            {subscriber.active ? t('admin.dashboard.subscribers.status.active') : t('admin.dashboard.subscribers.status.inactive')}
                           </span>
                         </td>
                         <td className="px-6 py-4 text-right">
@@ -281,12 +316,12 @@ export default function AdminDashboard({
                             {subscriber.active ? (
                               <>
                                 <UserX className="w-4 h-4 mr-2" />
-                                Deactivate
+                                {t('admin.dashboard.subscribers.actions.deactivate')}
                               </>
                             ) : (
                               <>
                                 <UserCheck className="w-4 h-4 mr-2" />
-                                Activate
+                                {t('admin.dashboard.subscribers.actions.activate')}
                               </>
                             )}
                           </Button>
@@ -297,9 +332,64 @@ export default function AdminDashboard({
                 </table>
                 {filteredSubscribers.length === 0 && (
                   <div className="text-center py-12 text-muted-foreground">
-                    No subscribers found matching your search.
+                    {t('admin.dashboard.subscribers.noResults')}
                   </div>
                 )}
+              </div>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="plans" className="mt-6">
+            <div className="bg-card rounded-xl border border-border p-8">
+              <h2 className="font-display text-xl font-semibold mb-6">
+                {t('admin.dashboard.plans.title')}
+              </h2>
+              <div className="space-y-8">
+                <div className="space-y-4">
+                  <Label className="text-sm font-medium">
+                    {t('admin.dashboard.plans.mostPopular')}
+                  </Label>
+                  <RadioGroup
+                    value={planConfig.mostPopular || 'none'}
+                    onValueChange={(value) => handleMostPopularChange(value === 'none' ? null : value as PlanId)}
+                    className="space-y-3"
+                  >
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="none" id="popular-none" />
+                      <Label htmlFor="popular-none" className="font-normal cursor-pointer">
+                        None
+                      </Label>
+                    </div>
+                    {(['free', 'standard', 'premium'] as PlanId[]).map((planId) => (
+                      <div key={planId} className="flex items-center space-x-2">
+                        <RadioGroupItem value={planId} id={`popular-${planId}`} />
+                        <Label htmlFor={`popular-${planId}`} className="font-normal cursor-pointer">
+                          {t(`admin.dashboard.plans.plans.${planId}`)}
+                        </Label>
+                      </div>
+                    ))}
+                  </RadioGroup>
+                </div>
+
+                <div className="space-y-4">
+                  <Label className="text-sm font-medium">
+                    {t('admin.dashboard.plans.disabledPlans')}
+                  </Label>
+                  <div className="space-y-3">
+                    {(['free', 'standard', 'premium'] as PlanId[]).map((planId) => (
+                      <div key={planId} className="flex items-center space-x-2">
+                        <Checkbox
+                          id={`disabled-${planId}`}
+                          checked={planConfig.disabledPlans.includes(planId)}
+                          onCheckedChange={(checked) => handleDisabledPlansChange(planId, checked === true)}
+                        />
+                        <Label htmlFor={`disabled-${planId}`} className="font-normal cursor-pointer">
+                          {t(`admin.dashboard.plans.plans.${planId}`)}
+                        </Label>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </TabsContent>

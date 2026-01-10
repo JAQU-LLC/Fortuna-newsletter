@@ -1,36 +1,25 @@
 import { useState } from 'react';
 import { useLocation, useSearch } from 'wouter';
 import { Header } from '@/components/Header';
+import { Footer } from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { CreditCard, Lock, CheckCircle2, ArrowLeft } from 'lucide-react';
 import { Link } from 'wouter';
-
-const planDetails: Record<string, { name: string; price: string; features: string[] }> = {
-  free: {
-    name: 'Free',
-    price: '$0/month',
-    features: ['Weekly newsletter', 'Access to public posts', 'Community updates'],
-  },
-  standard: {
-    name: 'Standard',
-    price: '$9/month',
-    features: ['Daily AI briefings', 'Exclusive analysis', 'Monthly webinars'],
-  },
-  premium: {
-    name: 'Premium',
-    price: '$29/month',
-    features: ['Private Discord', '1-on-1 calls', 'Custom research', 'Team seats'],
-  },
-};
+import { useTranslation } from 'react-i18next';
 
 export default function Payment() {
+  const { t } = useTranslation();
   const searchString = useSearch();
   const params = new URLSearchParams(searchString);
-  const planId = params.get('plan') || 'free';
-  const plan = planDetails[planId] || planDetails.free;
+  const planId = (params.get('plan') || 'free') as 'free' | 'standard' | 'premium';
+  
+  // Get plan details from translations
+  const planName = t(`payment.planDetails.${planId}.name`);
+  const planPrice = t(`payment.planDetails.${planId}.price`);
+  const planFeatures = t(`payment.planDetails.${planId}.features`, { returnObjects: true }) as string[];
 
   const [, setLocation] = useLocation();
   const { toast } = useToast();
@@ -48,64 +37,68 @@ export default function Payment() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name || !form.email) {
-      toast({ title: 'Please fill in all required fields', variant: 'destructive' });
+      toast({ title: t('payment.messages.fillRequiredFields'), variant: 'destructive' });
       return;
     }
     if (planId !== 'free' && (!form.cardNumber || !form.expiry || !form.cvc)) {
-      toast({ title: 'Please enter payment details', variant: 'destructive' });
+      toast({ title: t('payment.messages.enterPaymentDetails'), variant: 'destructive' });
       return;
     }
     setIsSubmitting(true);
     setTimeout(() => {
       setIsSubmitting(false);
       setIsComplete(true);
-      toast({ title: 'Subscription successful!', description: `You're now on the ${plan.name} plan.` });
+      toast({ 
+        title: t('payment.messages.subscriptionSuccessful'), 
+        description: t('payment.messages.subscriptionSuccessDescription', { planName }) 
+      });
     }, 1500);
   };
 
   if (isComplete) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background flex flex-col">
         <Header />
-        <main className="pt-24 pb-16 flex items-center justify-center">
+        <main className="pt-24 pb-16 flex items-center justify-center flex-1">
           <div className="max-w-md w-full mx-6 text-center">
             <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
               <CheckCircle2 className="w-10 h-10 text-green-600" />
             </div>
-            <h1 className="font-display text-3xl font-bold mb-4">Welcome to Fortuna.ai!</h1>
+            <h1 className="font-display text-3xl font-bold mb-4">{t('payment.success.title')}</h1>
             <p className="text-muted-foreground mb-8">
-              Your {plan.name} subscription is now active. Check your email for confirmation.
+              {t('payment.success.message', { username: form.name, planName })}
             </p>
             <Button onClick={() => setLocation('/posts')} className="h-12 px-8 rounded-xl" data-testid="button-view-posts">
-              View Posts
+              {t('payment.success.viewPosts')}
             </Button>
           </div>
         </main>
+        <Footer />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <Header />
       <main className="pt-24 pb-16">
         <div className="max-w-4xl mx-auto px-6">
           <Link href="/" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-8" data-testid="link-back">
             <ArrowLeft className="w-4 h-4" />
-            Back to plans
+            {t('payment.backToPlans')}
           </Link>
 
           <div className="grid lg:grid-cols-5 gap-8">
             <div className="lg:col-span-3">
               <div className="bg-card rounded-2xl border border-border p-8">
-                <h1 className="font-display text-2xl font-semibold mb-6">Complete your subscription</h1>
+                <h1 className="font-display text-2xl font-semibold mb-6">{t('payment.title')}</h1>
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label htmlFor="name">Full Name</Label>
+                      <Label htmlFor="name">{t('payment.labels.fullName')}</Label>
                       <Input
                         id="name"
-                        placeholder="John Smith"
+                        placeholder={t('payment.placeholders.name')}
                         value={form.name}
                         onChange={(e) => setForm({ ...form, name: e.target.value })}
                         className="h-12 rounded-xl"
@@ -113,11 +106,11 @@ export default function Payment() {
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="email">Email</Label>
+                      <Label htmlFor="email">{t('payment.labels.email')}</Label>
                       <Input
                         id="email"
                         type="email"
-                        placeholder="john@example.com"
+                        placeholder={t('payment.placeholders.email')}
                         value={form.email}
                         onChange={(e) => setForm({ ...form, email: e.target.value })}
                         className="h-12 rounded-xl"
@@ -131,14 +124,14 @@ export default function Payment() {
                       <div className="border-t border-border pt-6">
                         <div className="flex items-center gap-2 mb-4">
                           <CreditCard className="w-5 h-5 text-muted-foreground" />
-                          <span className="font-medium">Payment Details</span>
+                          <span className="font-medium">{t('payment.labels.paymentDetails')}</span>
                         </div>
                         <div className="space-y-4">
                           <div className="space-y-2">
-                            <Label htmlFor="card">Card Number</Label>
+                            <Label htmlFor="card">{t('payment.labels.cardNumber')}</Label>
                             <Input
                               id="card"
-                              placeholder="4242 4242 4242 4242"
+                              placeholder={t('payment.placeholders.cardNumber')}
                               value={form.cardNumber}
                               onChange={(e) => setForm({ ...form, cardNumber: e.target.value })}
                               className="h-12 rounded-xl"
@@ -147,10 +140,10 @@ export default function Payment() {
                           </div>
                           <div className="grid grid-cols-2 gap-4">
                             <div className="space-y-2">
-                              <Label htmlFor="expiry">Expiry</Label>
+                              <Label htmlFor="expiry">{t('payment.labels.expiry')}</Label>
                               <Input
                                 id="expiry"
-                                placeholder="MM/YY"
+                                placeholder={t('payment.placeholders.expiry')}
                                 value={form.expiry}
                                 onChange={(e) => setForm({ ...form, expiry: e.target.value })}
                                 className="h-12 rounded-xl"
@@ -158,10 +151,10 @@ export default function Payment() {
                               />
                             </div>
                             <div className="space-y-2">
-                              <Label htmlFor="cvc">CVC</Label>
+                              <Label htmlFor="cvc">{t('payment.labels.cvc')}</Label>
                               <Input
                                 id="cvc"
-                                placeholder="123"
+                                placeholder={t('payment.placeholders.cvc')}
                                 value={form.cvc}
                                 onChange={(e) => setForm({ ...form, cvc: e.target.value })}
                                 className="h-12 rounded-xl"
@@ -175,12 +168,17 @@ export default function Payment() {
                   )}
 
                   <Button type="submit" className="w-full h-12 rounded-xl font-semibold" disabled={isSubmitting} data-testid="button-subscribe">
-                    {isSubmitting ? 'Processing...' : planId === 'free' ? 'Start Free Plan' : `Pay ${plan.price.split('/')[0]}`}
+                    {isSubmitting 
+                      ? t('payment.buttons.processing') 
+                      : planId === 'free' 
+                        ? t('payment.buttons.startFreePlan') 
+                        : t('payment.buttons.subscribe', { price: planPrice.split('/')[0] })
+                    }
                   </Button>
 
                   <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
                     <Lock className="w-3 h-3" />
-                    Secure checkout powered by Stripe
+                    {t('payment.secureCheckout')}
                   </div>
                 </form>
               </div>
@@ -188,17 +186,17 @@ export default function Payment() {
 
             <div className="lg:col-span-2">
               <div className="bg-muted/50 rounded-2xl border border-border p-6 sticky top-28">
-                <h2 className="font-display text-lg font-semibold mb-4">Order Summary</h2>
+                <h2 className="font-display text-lg font-semibold mb-4">{t('payment.orderSummary.title')}</h2>
                 <div className="space-y-4">
                   <div className="flex justify-between items-center pb-4 border-b border-border">
                     <div>
-                      <div className="font-medium">{plan.name} Plan</div>
-                      <div className="text-sm text-muted-foreground">Monthly subscription</div>
+                      <div className="font-medium">{planName} Plan</div>
+                      <div className="text-sm text-muted-foreground">{t('payment.orderSummary.monthlySubscription')}</div>
                     </div>
-                    <div className="font-semibold">{plan.price.split('/')[0]}</div>
+                    <div className="font-semibold">{planPrice.split('/')[0]}</div>
                   </div>
                   <ul className="space-y-2">
-                    {plan.features.map((feature, idx) => (
+                    {planFeatures.map((feature, idx) => (
                       <li key={idx} className="flex items-center gap-2 text-sm text-muted-foreground">
                         <CheckCircle2 className="w-4 h-4 text-primary" />
                         {feature}
@@ -206,8 +204,8 @@ export default function Payment() {
                     ))}
                   </ul>
                   <div className="pt-4 border-t border-border flex justify-between items-center font-semibold">
-                    <span>Total</span>
-                    <span className="text-xl">{plan.price.split('/')[0]}</span>
+                    <span>{t('payment.orderSummary.total')}</span>
+                    <span className="text-xl">{planPrice.split('/')[0]}</span>
                   </div>
                 </div>
               </div>
@@ -215,6 +213,7 @@ export default function Payment() {
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   );
 }

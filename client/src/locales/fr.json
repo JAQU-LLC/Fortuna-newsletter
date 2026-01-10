@@ -1,0 +1,243 @@
+{
+  "home": {
+    "badge": "Insights de Trading Alimentés par l'IA pour les Actions Américaines",
+    "title": "Obtenez un avantage en trading avec",
+    "titleBrand": "Fortuna.ai",
+    "description": "",
+    "plans": {
+      "free": {
+        "name": "Gratuit",
+        "price": "$0",
+        "period": "/mois",
+        "description": "Commencez avec des alertes de trading",
+        "features": [
+          "Bulletin hebdomadaire",
+          "Accès aux publications publiques",
+          "Accès Discord dans les canaux publics"
+        ],
+        "cta": "Commencer"
+      },
+      "standard": {
+        "name": "Standard",
+        "price": "$0",
+        "period": "/mois",
+        "description": "Pour les passionnés de trading qui veulent obtenir un avantage",
+        "features": [
+          "Tout dans Gratuit",
+          "Bulletin quotidien",
+          "Accès Discord dans certains canaux privés"
+        ],
+        "cta": "S'abonner"
+      },
+      "premium": {
+        "name": "Premium",
+        "price": "$0",
+        "period": "/mois",
+        "description": "Accès complet à tout",
+        "features": [
+          "Tout dans Standard",
+          "Accès Discord à tous les canaux",
+          "Agents IA pour analyser les tendances des actions / marché"
+        ],
+        "cta": "Passer au Premium"
+      }
+    },
+    "mostPopular": "Le Plus Populaire"
+  },
+  "posts": {
+    "title": "Dernières Publications",
+    "description": "Explorez notre collection d'insights IA, d'analyses de l'industrie et de guides pratiques.",
+    "readMore": "Lire la suite",
+    "noPosts": "Aucune publication pour le moment. Revenez bientôt !",
+    "backToPosts": "Retour aux Publications"
+  },
+  "payment": {
+    "backToPlans": "Retour aux plans",
+    "title": "Complétez votre abonnement",
+    "labels": {
+      "fullName": "Nom Complet",
+      "email": "E-mail",
+      "paymentDetails": "Détails de Paiement",
+      "cardNumber": "Numéro de Carte",
+      "expiry": "Expiration",
+      "cvc": "CVC"
+    },
+    "placeholders": {
+      "name": "Jean Dupont",
+      "email": "jean@exemple.com",
+      "cardNumber": "4242 4242 4242 4242",
+      "expiry": "MM/AA",
+      "cvc": "123"
+    },
+    "buttons": {
+      "processing": "Traitement en cours...",
+      "startFreePlan": "Commencer le Plan Gratuit",
+      "subscribe": "Payer {{price}}"
+    },
+    "secureCheckout": "Paiement sécurisé fourni par Stripe",
+    "orderSummary": {
+      "title": "Résumé de la Commande",
+      "monthlySubscription": "Abonnement mensuel",
+      "total": "Total"
+    },
+    "success": {
+      "title": "Bienvenue sur Fortuna.ai !",
+      "message": "Bienvenue, {{username}} ! Votre abonnement {{planName}} est maintenant actif. Vérifiez votre e-mail pour confirmation.",
+      "viewPosts": "Voir les Publications"
+    },
+    "planDetails": {
+      "free": {
+        "name": "Gratuit",
+        "price": "$0/mois",
+        "features": [
+          "Bulletin hebdomadaire",
+          "Accès aux publications publiques",
+          "Mises à jour de la communauté"
+        ]
+      },
+      "standard": {
+        "name": "Standard",
+        "price": "$9/mois",
+        "features": [
+          "Résumés quotidiens d'IA",
+          "Analyse exclusive",
+          "Séminaires web mensuels"
+        ]
+      },
+      "premium": {
+        "name": "Premium",
+        "price": "$29/mois",
+        "features": [
+          "Discord privé",
+          "Appels individuels",
+          "Recherche personnalisée",
+          "Places d'équipe"
+        ]
+      }
+    },
+    "messages": {
+      "fillRequiredFields": "Veuillez remplir tous les champs requis",
+      "enterPaymentDetails": "Veuillez entrer les détails de paiement",
+      "subscriptionSuccessful": "Abonnement réussi !",
+      "subscriptionSuccessDescription": "Vous êtes maintenant sur le plan {{planName}}."
+    }
+  },
+  "admin": {
+    "login": {
+      "backToHome": "Retour à l'accueil",
+      "title": "Connexion Administrateur",
+      "description": "Connectez-vous pour accéder au tableau de bord administrateur",
+      "labels": {
+        "username": "Nom d'Utilisateur",
+        "password": "Mot de Passe"
+      },
+      "placeholders": {
+        "username": "Entrez le nom d'utilisateur",
+        "password": "Entrez le mot de passe"
+      },
+      "signIn": "Se Connecter",
+      "restricted": "Cette zone est réservée aux administrateurs uniquement.",
+      "messages": {
+        "welcomeBack": "Bon retour !",
+        "loggedInAsAdmin": "Vous êtes maintenant connecté en tant qu'administrateur.",
+        "invalidCredentials": "Identifiants invalides",
+        "checkCredentials": "Veuillez vérifier votre nom d'utilisateur et mot de passe."
+      }
+    },
+    "dashboard": {
+      "title": "Tableau de Bord Administrateur",
+      "viewSite": "Voir le Site",
+      "logout": "Déconnexion",
+      "stats": {
+        "totalSubscribers": "Total des Abonnés",
+        "activeSubscribers": "Abonnés Actifs",
+        "publishedPosts": "Publications Publiées"
+      },
+      "tabs": {
+        "write": "Écrire une Publication",
+        "users": "Abonnés",
+        "plans": "Paramètres de Plan"
+      },
+      "plans": {
+        "title": "Configuration des Plans",
+        "mostPopular": "Plan le Plus Populaire",
+        "disabledPlans": "Plans Désactivés",
+        "save": "Enregistrer les Paramètres de Plan",
+        "saved": "Paramètres de plan enregistrés avec succès !",
+        "plans": {
+          "free": "Gratuit",
+          "standard": "Standard",
+          "premium": "Premium"
+        }
+      },
+      "writePost": {
+        "title": "Créer une Nouvelle Publication",
+        "labels": {
+          "postTitle": "Titre de la Publication",
+          "postContent": "Contenu de la Publication"
+        },
+        "placeholders": {
+          "title": "Entrez le titre de la publication...",
+          "content": "Écrivez le contenu de votre publication ici..."
+        },
+        "publish": "Publier la Publication",
+        "messages": {
+          "fillAllFields": "Veuillez remplir tous les champs",
+          "postPublished": "Publication publiée !",
+          "postLive": "Votre publication est maintenant en ligne."
+        }
+      },
+      "subscribers": {
+        "title": "Gérer les Abonnés",
+        "searchPlaceholder": "Rechercher par e-mail...",
+        "table": {
+          "name": "Nom",
+          "email": "E-mail",
+          "subscribed": "Abonné",
+          "status": "Statut",
+          "action": "Action"
+        },
+        "status": {
+          "active": "Actif",
+          "inactive": "Inactif"
+        },
+        "actions": {
+          "activate": "Activer",
+          "deactivate": "Désactiver"
+        },
+        "noResults": "Aucun abonné trouvé correspondant à votre recherche."
+      }
+    }
+  },
+  "common": {
+    "nav": {
+      "subscribe": "S'abonner",
+      "posts": "Articles"
+    },
+    "buttons": {
+      "back": "Retour"
+    },
+    "comingSoon": "Bientôt disponible"
+  },
+  "footer": {
+    "social": {
+      "linkedin": "LinkedIn",
+      "instagram": "Instagram",
+      "creator": "Créateur"
+    },
+    "legal": {
+      "privacyPolicy": "Politique de Confidentialité",
+      "termsOfUse": "Conditions d'Utilisation"
+    },
+    "copyright": "© 2026 Fortuna.ai. Tous droits réservés."
+  },
+  "notFound": {
+    "title": "404 Page Non Trouvée",
+    "message": "Désolé, cette page n'existe pas."
+  },
+  "postDetail": {
+    "backToPosts": "Retour aux Publications",
+    "notFound": "Publication non trouvée",
+    "notFoundMessage": "La publication que vous recherchez n'existe pas."
+  }
+}

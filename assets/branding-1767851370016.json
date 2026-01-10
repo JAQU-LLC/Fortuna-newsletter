@@ -48,8 +48,8 @@
   },
   "components": {},
   "images": {
-    "logo": "File saved at: attached_assets/logo.png",
-    "favicon": "File saved at: attached_assets/favicon.png",
+    "logo": "File saved at: assets/logo.png",
+    "favicon": "File saved at: assets/favicon.png",
     "ogImage": null
   },
   "__framework_hints": [],

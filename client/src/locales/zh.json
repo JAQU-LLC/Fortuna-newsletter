@@ -1,0 +1,243 @@
+{
+  "home": {
+    "badge": "AI驅動的美股交易洞察",
+    "title": "透過以下方式獲得交易優勢",
+    "titleBrand": "Fortuna.ai",
+    "description": "",
+    "plans": {
+      "free": {
+        "name": "免費",
+        "price": "$0",
+        "period": "/月",
+        "description": "開始使用交易提醒",
+        "features": [
+          "每週簡報",
+          "訪問公開文章",
+          "Discord公共頻道訪問"
+        ],
+        "cta": "開始使用"
+      },
+      "standard": {
+        "name": "標準",
+        "price": "$0",
+        "period": "/月",
+        "description": "適合希望獲得交易優勢的交易愛好者",
+        "features": [
+          "免費版的所有功能",
+          "每日簡報",
+          "Discord特定私人頻道訪問"
+        ],
+        "cta": "訂閱"
+      },
+      "premium": {
+        "name": "高級",
+        "price": "$0",
+        "period": "/月",
+        "description": "完全訪問所有內容",
+        "features": [
+          "標準版的所有功能",
+          "Discord所有頻道訪問",
+          "AI代理分析股票/市場趨勢"
+        ],
+        "cta": "升級至高級版"
+      }
+    },
+    "mostPopular": "最受歡迎"
+  },
+  "posts": {
+    "title": "最新文章",
+    "description": "探索我們的AI洞察、行業分析和實用指南集合。",
+    "readMore": "閱讀更多",
+    "noPosts": "暫無文章。請稍後再來！",
+    "backToPosts": "返回文章列表"
+  },
+  "payment": {
+    "backToPlans": "返回計劃",
+    "title": "完成您的訂閱",
+    "labels": {
+      "fullName": "全名",
+      "email": "電子郵件",
+      "paymentDetails": "支付詳情",
+      "cardNumber": "卡號",
+      "expiry": "到期日期",
+      "cvc": "CVC"
+    },
+    "placeholders": {
+      "name": "張三",
+      "email": "zhangsan@example.com",
+      "cardNumber": "4242 4242 4242 4242",
+      "expiry": "MM/YY",
+      "cvc": "123"
+    },
+    "buttons": {
+      "processing": "處理中...",
+      "startFreePlan": "開始免費計劃",
+      "subscribe": "支付 {{price}}"
+    },
+    "secureCheckout": "由 Stripe 提供安全結帳",
+    "orderSummary": {
+      "title": "訂單摘要",
+      "monthlySubscription": "月度訂閱",
+      "total": "總計"
+    },
+    "success": {
+      "title": "歡迎使用 Fortuna.ai！",
+      "message": "歡迎，{{username}}！您的 {{planName}} 訂閱現已激活。請查看您的電子郵件以確認。",
+      "viewPosts": "查看文章"
+    },
+    "planDetails": {
+      "free": {
+        "name": "免費",
+        "price": "$0/月",
+        "features": [
+          "每週簡報",
+          "訪問公開文章",
+          "社區更新"
+        ]
+      },
+      "standard": {
+        "name": "標準",
+        "price": "$9/月",
+        "features": [
+          "每日 AI 簡報",
+          "獨家分析",
+          "月度網絡研討會"
+        ]
+      },
+      "premium": {
+        "name": "高級",
+        "price": "$29/月",
+        "features": [
+          "私人 Discord",
+          "一對一通話",
+          "定制研究",
+          "團隊席位"
+        ]
+      }
+    },
+    "messages": {
+      "fillRequiredFields": "請填寫所有必填字段",
+      "enterPaymentDetails": "請輸入支付詳情",
+      "subscriptionSuccessful": "訂閱成功！",
+      "subscriptionSuccessDescription": "您現在是 {{planName}} 計劃。"
+    }
+  },
+  "admin": {
+    "login": {
+      "backToHome": "返回首頁",
+      "title": "管理員登錄",
+      "description": "登錄以訪問管理儀表板",
+      "labels": {
+        "username": "用戶名",
+        "password": "密碼"
+      },
+      "placeholders": {
+        "username": "輸入用戶名",
+        "password": "輸入密碼"
+      },
+      "signIn": "登錄",
+      "restricted": "此區域僅限管理員訪問。",
+      "messages": {
+        "welcomeBack": "歡迎回來！",
+        "loggedInAsAdmin": "您已以管理員身份登錄。",
+        "invalidCredentials": "無效的憑據",
+        "checkCredentials": "請檢查您的用戶名和密碼。"
+      }
+    },
+    "dashboard": {
+      "title": "管理儀表板",
+      "viewSite": "查看網站",
+      "logout": "退出登錄",
+      "stats": {
+        "totalSubscribers": "總訂閱者",
+        "activeSubscribers": "活躍訂閱者",
+        "publishedPosts": "已發佈文章"
+      },
+      "tabs": {
+        "write": "撰寫文章",
+        "users": "訂閱者",
+        "plans": "計劃設置"
+      },
+      "plans": {
+        "title": "計劃配置",
+        "mostPopular": "最受歡迎的計劃",
+        "disabledPlans": "已禁用的計劃",
+        "save": "保存計劃設置",
+        "saved": "計劃設置已成功保存！",
+        "plans": {
+          "free": "免費",
+          "standard": "標準",
+          "premium": "高級"
+        }
+      },
+      "writePost": {
+        "title": "創建新文章",
+        "labels": {
+          "postTitle": "文章標題",
+          "postContent": "文章內容"
+        },
+        "placeholders": {
+          "title": "輸入文章標題...",
+          "content": "在此處編寫您的文章內容..."
+        },
+        "publish": "發佈文章",
+        "messages": {
+          "fillAllFields": "請填寫所有字段",
+          "postPublished": "文章已發佈！",
+          "postLive": "您的文章現已上線。"
+        }
+      },
+      "subscribers": {
+        "title": "管理訂閱者",
+        "searchPlaceholder": "按電子郵件搜索...",
+        "table": {
+          "name": "姓名",
+          "email": "電子郵件",
+          "subscribed": "訂閱時間",
+          "status": "狀態",
+          "action": "操作"
+        },
+        "status": {
+          "active": "活躍",
+          "inactive": "非活躍"
+        },
+        "actions": {
+          "activate": "激活",
+          "deactivate": "停用"
+        },
+        "noResults": "未找到匹配您搜索的訂閱者。"
+      }
+    }
+  },
+  "common": {
+    "nav": {
+      "subscribe": "訂閱",
+      "posts": "文章"
+    },
+    "buttons": {
+      "back": "返回"
+    },
+    "comingSoon": "即將推出"
+  },
+  "footer": {
+    "social": {
+      "linkedin": "LinkedIn",
+      "instagram": "Instagram",
+      "creator": "創建者"
+    },
+    "legal": {
+      "privacyPolicy": "隱私政策",
+      "termsOfUse": "使用條款"
+    },
+    "copyright": "© 2026 Fortuna.ai. 保留所有權利。"
+  },
+  "notFound": {
+    "title": "404 頁面未找到",
+    "message": "抱歉，此頁面不存在。"
+  },
+  "postDetail": {
+    "backToPosts": "返回文章列表",
+    "notFound": "文章未找到",
+    "notFoundMessage": "您查找的文章不存在。"
+  }
+}

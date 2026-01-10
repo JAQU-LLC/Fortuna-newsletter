@@ -1,0 +1,243 @@
+{
+  "home": {
+    "badge": "Insights de Trading Impulsados por IA para Acciones de EE. UU.",
+    "title": "Obtén una ventaja en el trading con",
+    "titleBrand": "Fortuna.ai",
+    "description": "",
+    "plans": {
+      "free": {
+        "name": "Gratis",
+        "price": "$0",
+        "period": "/mes",
+        "description": "Comienza con alertas de trading",
+        "features": [
+          "Boletín semanal",
+          "Acceso a publicaciones públicas",
+          "Acceso a Discord en canales públicos"
+        ],
+        "cta": "Comenzar"
+      },
+      "standard": {
+        "name": "Estándar",
+        "price": "$0",
+        "period": "/mes",
+        "description": "Para entusiastas del trading que quieren obtener una ventaja",
+        "features": [
+          "Todo lo de Gratis",
+          "Boletín diario",
+          "Acceso a Discord en ciertos canales privados"
+        ],
+        "cta": "Suscribirse"
+      },
+      "premium": {
+        "name": "Premium",
+        "price": "$0",
+        "period": "/mes",
+        "description": "Acceso completo a todo",
+        "features": [
+          "Todo lo de Estándar",
+          "Acceso a Discord en todos los canales",
+          "Agentes de IA para analizar tendencias de acciones / mercado"
+        ],
+        "cta": "Ir Premium"
+      }
+    },
+    "mostPopular": "Más Popular"
+  },
+  "posts": {
+    "title": "Últimas Publicaciones",
+    "description": "Explora nuestra colección de insights de IA, análisis de la industria y guías prácticas.",
+    "readMore": "Leer más",
+    "noPosts": "Aún no hay publicaciones. ¡Vuelve pronto!",
+    "backToPosts": "Volver a Publicaciones"
+  },
+  "payment": {
+    "backToPlans": "Volver a planes",
+    "title": "Completa tu suscripción",
+    "labels": {
+      "fullName": "Nombre Completo",
+      "email": "Correo Electrónico",
+      "paymentDetails": "Detalles de Pago",
+      "cardNumber": "Número de Tarjeta",
+      "expiry": "Vencimiento",
+      "cvc": "CVC"
+    },
+    "placeholders": {
+      "name": "Juan Pérez",
+      "email": "juan@ejemplo.com",
+      "cardNumber": "4242 4242 4242 4242",
+      "expiry": "MM/AA",
+      "cvc": "123"
+    },
+    "buttons": {
+      "processing": "Procesando...",
+      "startFreePlan": "Comenzar Plan Gratis",
+      "subscribe": "Pagar {{price}}"
+    },
+    "secureCheckout": "Pago seguro proporcionado por Stripe",
+    "orderSummary": {
+      "title": "Resumen del Pedido",
+      "monthlySubscription": "Suscripción mensual",
+      "total": "Total"
+    },
+    "success": {
+      "title": "¡Bienvenido a Fortuna.ai!",
+      "message": "¡Bienvenido, {{username}}! Tu suscripción {{planName}} ya está activa. Revisa tu correo para confirmación.",
+      "viewPosts": "Ver Publicaciones"
+    },
+    "planDetails": {
+      "free": {
+        "name": "Gratis",
+        "price": "$0/mes",
+        "features": [
+          "Boletín semanal",
+          "Acceso a publicaciones públicas",
+          "Actualizaciones de la comunidad"
+        ]
+      },
+      "standard": {
+        "name": "Estándar",
+        "price": "$9/mes",
+        "features": [
+          "Resúmenes diarios de IA",
+          "Análisis exclusivo",
+          "Seminarios web mensuales"
+        ]
+      },
+      "premium": {
+        "name": "Premium",
+        "price": "$29/mes",
+        "features": [
+          "Discord privado",
+          "Llamadas 1 a 1",
+          "Investigación personalizada",
+          "Asientos para equipos"
+        ]
+      }
+    },
+    "messages": {
+      "fillRequiredFields": "Por favor completa todos los campos requeridos",
+      "enterPaymentDetails": "Por favor ingresa los detalles de pago",
+      "subscriptionSuccessful": "¡Suscripción exitosa!",
+      "subscriptionSuccessDescription": "Ahora estás en el plan {{planName}}."
+    }
+  },
+  "admin": {
+    "login": {
+      "backToHome": "Volver al inicio",
+      "title": "Inicio de Sesión de Administrador",
+      "description": "Inicia sesión para acceder al panel de administración",
+      "labels": {
+        "username": "Nombre de Usuario",
+        "password": "Contraseña"
+      },
+      "placeholders": {
+        "username": "Ingresa nombre de usuario",
+        "password": "Ingresa contraseña"
+      },
+      "signIn": "Iniciar Sesión",
+      "restricted": "Esta área está restringida solo para administradores.",
+      "messages": {
+        "welcomeBack": "¡Bienvenido de nuevo!",
+        "loggedInAsAdmin": "Ahora estás conectado como administrador.",
+        "invalidCredentials": "Credenciales inválidas",
+        "checkCredentials": "Por favor verifica tu nombre de usuario y contraseña."
+      }
+    },
+    "dashboard": {
+      "title": "Panel de Administración",
+      "viewSite": "Ver Sitio",
+      "logout": "Cerrar Sesión",
+      "stats": {
+        "totalSubscribers": "Total de Suscriptores",
+        "activeSubscribers": "Suscriptores Activos",
+        "publishedPosts": "Publicaciones Publicadas"
+      },
+      "tabs": {
+        "write": "Escribir Publicación",
+        "users": "Suscriptores",
+        "plans": "Configuración de Planes"
+      },
+      "plans": {
+        "title": "Configuración de Planes",
+        "mostPopular": "Plan Más Popular",
+        "disabledPlans": "Planes Deshabilitados",
+        "save": "Guardar Configuración de Planes",
+        "saved": "¡Configuración de planes guardada exitosamente!",
+        "plans": {
+          "free": "Gratis",
+          "standard": "Estándar",
+          "premium": "Premium"
+        }
+      },
+      "writePost": {
+        "title": "Crear Nueva Publicación",
+        "labels": {
+          "postTitle": "Título de la Publicación",
+          "postContent": "Contenido de la Publicación"
+        },
+        "placeholders": {
+          "title": "Ingresa el título de la publicación...",
+          "content": "Escribe el contenido de tu publicación aquí..."
+        },
+        "publish": "Publicar Publicación",
+        "messages": {
+          "fillAllFields": "Por favor completa todos los campos",
+          "postPublished": "¡Publicación publicada!",
+          "postLive": "Tu publicación ya está disponible."
+        }
+      },
+      "subscribers": {
+        "title": "Gestionar Suscriptores",
+        "searchPlaceholder": "Buscar por correo electrónico...",
+        "table": {
+          "name": "Nombre",
+          "email": "Correo Electrónico",
+          "subscribed": "Suscrito",
+          "status": "Estado",
+          "action": "Acción"
+        },
+        "status": {
+          "active": "Activo",
+          "inactive": "Inactivo"
+        },
+        "actions": {
+          "activate": "Activar",
+          "deactivate": "Desactivar"
+        },
+        "noResults": "No se encontraron suscriptores que coincidan con tu búsqueda."
+      }
+    }
+  },
+  "common": {
+    "nav": {
+      "subscribe": "Suscribirse",
+      "posts": "Publicaciones"
+    },
+    "buttons": {
+      "back": "Volver"
+    },
+    "comingSoon": "Próximamente"
+  },
+  "footer": {
+    "social": {
+      "linkedin": "LinkedIn",
+      "instagram": "Instagram",
+      "creator": "Creador"
+    },
+    "legal": {
+      "privacyPolicy": "Política de Privacidad",
+      "termsOfUse": "Términos de Uso"
+    },
+    "copyright": "© 2026 Fortuna.ai. Todos los derechos reservados."
+  },
+  "notFound": {
+    "title": "404 Página No Encontrada",
+    "message": "Lo sentimos, esta página no existe."
+  },
+  "postDetail": {
+    "backToPosts": "Volver a Publicaciones",
+    "notFound": "Publicación no encontrada",
+    "notFoundMessage": "La publicación que buscas no existe."
+  }
+}

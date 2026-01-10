@@ -1,8 +1,11 @@
 import { Link, useLocation } from 'wouter';
 import logoUrl from '@assets/logo.png';
+import { useTranslation } from 'react-i18next';
+import { LanguageSwitcher } from './LanguageSwitcher';
 
 export function Header() {
   const [location] = useLocation();
+  const { t } = useTranslation();
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 glass" data-testid="header">
@@ -10,7 +13,7 @@ export function Header() {
         <Link href="/" data-testid="link-home">
           <img src={logoUrl} alt="Fortuna.ai" className="h-8 w-auto invert" />
         </Link>
-        <nav className="flex items-center gap-8">
+        <nav className="flex items-center gap-4">
           <Link
             href="/"
             className={`text-sm font-medium transition-colors hover:text-primary ${
@@ -18,7 +21,7 @@ export function Header() {
             }`}
             data-testid="link-subscribe"
           >
-            Subscribe
+            {t('common.nav.subscribe')}
           </Link>
           <Link
             href="/posts"
@@ -27,8 +30,9 @@ export function Header() {
             }`}
             data-testid="link-posts"
           >
-            Posts
+            {t('common.nav.posts')}
           </Link>
+          <LanguageSwitcher />
         </nav>
       </div>
     </header>
