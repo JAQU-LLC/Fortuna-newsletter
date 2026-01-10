@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Sparkles, Check } from 'lucide-react';
 import { useLocation } from 'wouter';
 import { useTranslation } from 'react-i18next';
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '@/hooks/useToast';
 import { isPlanDisabled, isPlanPopular, type PlanId } from '@/lib/planConfig';
 
 const planIds: PlanId[] = ['free', 'standard', 'premium'];
@@ -15,7 +15,9 @@ export default function Home() {
   const { toast } = useToast();
 
   const handleSelectPlan = (planId: string) => {
-    if (isPlanDisabled(planId as PlanId)) {
+    const isDisabled = isPlanDisabled(planId as PlanId);
+    
+    if (isDisabled) {
       return; // Don't navigate if plan is disabled
     }
     
@@ -23,7 +25,7 @@ export default function Home() {
     // For now, only free plan is available
     if (planId === 'free') {
       // Free plan - can proceed without payment
-    setLocation(`/payment?plan=${planId}`);
+      setLocation(`/payment?plan=${planId}`);
     } else {
       // Paid plans (standard/premium) - payment not available yet
       // Show message that Stripe integration is coming soon

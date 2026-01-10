@@ -3,57 +3,38 @@ import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { useStore } from "./lib/store";
 
 // User facing pages
-import Home from "@/pages/user/home";
-import Posts from "@/pages/user/posts";
-import PostDetail from "@/pages/user/post-detail";
+import Home from "@/pages/user/Home";
+import Posts from "@/pages/user/Posts";
+import PostDetail from "@/pages/user/PostDetail";
 
 // TODO: 
 // This will be connected with STRIPE payments
-import Payment from "@/pages/user/payment";
+import Payment from "@/pages/user/Payment";
 // Hidden Admin pages
-import AdminLogin from "@/pages/admin/admin-login";
-import AdminDashboard from "@/pages/admin/admin-dashboard";
+import AdminLogin from "@/pages/admin/AdminLogin";
+import AdminDashboard from "@/pages/admin/AdminDashboard";
 // Footer
-import Privacy from "@/pages/user/privacy";
-import Terms from "@/pages/user/terms";
+import Privacy from "@/pages/user/Privacy";
+import Terms from "@/pages/user/Terms";
 // Not Found
-import NotFound from "@/pages/user/not-found";
+import NotFound from "@/pages/user/NotFound";
 
 function Router() {
-  const {
-    subscribers,
-    posts,
-    isAdmin,
-    addSubscriber,
-    toggleSubscriberStatus,
-    addPost,
-    login,
-    logout,
-  } = useStore();
-
   return (
     <Switch>
       <Route path="/admin/dashboard">
-        <AdminDashboard
-          isAdmin={isAdmin}
-          subscribers={subscribers}
-          posts={posts}
-          onToggleSubscriber={toggleSubscriberStatus}
-          onAddPost={addPost}
-          onLogout={logout}
-        />
+        <AdminDashboard />
       </Route>
       <Route path="/admin">
-        <AdminLogin onLogin={login} />
+        <AdminLogin />
       </Route>
       <Route path="/posts/:id">
         <PostDetail />
       </Route>
       <Route path="/posts">
-        <Posts posts={posts} />
+        <Posts />
       </Route>
       <Route path="/payment">
         <Payment />

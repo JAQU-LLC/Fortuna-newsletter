@@ -1,18 +1,44 @@
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
-import { Post } from '@/models/post';
 import { Calendar, ArrowRight } from 'lucide-react';
 import { format } from 'date-fns';
 import { Link } from 'wouter';
 import { useTranslation } from 'react-i18next';
+import { usePosts } from '@/hooks/usePosts';
 
-interface PostsProps {
-  posts: Post[];
-}
-
-export default function Posts({ posts }: PostsProps) {
+export default function Posts() {
   const { t } = useTranslation();
-  const publishedPosts = posts.filter((p) => p.published);
+  const { data: postsData, isLoading, error } = usePosts(true); // Only published posts for public
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background flex flex-col">
+        <Header />
+        <main className="pt-24 pb-16 flex-1 flex items-center justify-center">
+          <div className="text-center text-muted-foreground">
+            <p>{t('common.loading', { defaultValue: 'Loading...' })}</p>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-background flex flex-col">
+        <Header />
+        <main className="pt-24 pb-16 flex-1 flex items-center justify-center">
+          <div className="text-center text-muted-foreground">
+            <p>{t('posts.error', { defaultValue: 'Failed to load posts. Please try again later.' })}</p>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  const publishedPosts = postsData?.posts || [];
 
   return (
     <div className="min-h-screen bg-background flex flex-col">

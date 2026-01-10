@@ -1,41 +1,42 @@
 import { useState } from 'react';
-import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '@/hooks/useToast';
 import { Lock, ArrowLeft } from 'lucide-react';
 import { Link } from 'wouter';
 import logoUrl from '@assets/logo.png';
 import { useTranslation } from 'react-i18next';
+import { useLogin } from '@/hooks/useAuth';
 
-interface AdminLoginProps {
-  onLogin: (username: string, password: string) => boolean;
-}
-
-export default function AdminLogin({ onLogin }: AdminLoginProps) {
+export default function AdminLogin() {
   const { t } = useTranslation();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [, setLocation] = useLocation();
   const { toast } = useToast();
+  const loginMutation = useLogin();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const success = onLogin(username, password);
-    if (success) {
-      setLocation('/admin/dashboard');
-      toast({
-        title: t('admin.login.messages.welcomeBack'),
-        description: t('admin.login.messages.loggedInAsAdmin'),
-      });
-    } else {
-      toast({
-        title: t('admin.login.messages.invalidCredentials'),
-        description: t('admin.login.messages.checkCredentials'),
-        variant: 'destructive',
-      });
-    }
+    
+    loginMutation.mutate(
+      { username, password },
+      {
+        onSuccess: () => {
+          toast({
+            title: t('admin.login.messages.welcomeBack'),
+            description: t('admin.login.messages.loggedInAsAdmin'),
+          });
+        },
+        onError: () => {
+          toast({
+            title: t('admin.login.messages.invalidCredentials'),
+            description: t('admin.login.messages.checkCredentials'),
+            variant: 'destructive',
+          });
+        },
+      }
+    );
   };
 
   return (
@@ -97,8 +98,9 @@ export default function AdminLogin({ onLogin }: AdminLoginProps) {
               type="submit"
               className="w-full h-12 rounded-xl font-semibold text-base"
               data-testid="button-login"
+              disabled={loginMutation.isPending}
             >
-              {t('admin.login.signIn')}
+              {loginMutation.isPending ? t('common.loading', { defaultValue: 'Loading...' }) : t('admin.login.signIn')}
             </Button>
           </form>
         </div>

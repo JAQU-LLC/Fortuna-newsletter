@@ -1,19 +1,20 @@
 # Fortuna.ai Newsletter Platform
 
-A modern newsletter subscription platform built with React, TypeScript, and Tailwind CSS. This is a frontend-only application designed to connect with a FastAPI backend (see [Backend API Documentation](docs/BACKEND_API.md)).
+A modern newsletter subscription platform built with React, TypeScript, and Tailwind CSS. This is a frontend-only application fully integrated with a FastAPI backend (see [Backend API Integration Documentation](docs/backend-newsltter-api-integration.md)).
 
 ## Features
 
 - **Subscription Plans**: Free, Standard ($9/mo), and Premium ($29/mo) tiers with configurable popularity and availability
 - **Public Posts**: Browse published newsletter articles with dedicated post detail pages
 - **Admin Dashboard**: Protected admin area for content management
-  - Create and publish posts
+  - Create, edit, and delete posts (with markdown support)
   - View and search subscribers by email
   - Activate/deactivate subscriptions
   - Configure plan settings (most popular, disabled plans)
-- **Payment Flow**: Mock payment page for subscription checkout
+- **Payment Flow**: Subscription checkout page (ready for Stripe integration)
 - **Internationalization**: Full i18n support with automatic language detection (English, Spanish, French, German, Chinese, Japanese)
 - **Responsive Footer**: Social links and legal pages (Privacy Policy, Terms of Use)
+- **Backend Integration**: Full API integration with React Query hooks, optimistic updates, and error handling
 - **Code Quality**: ESLint, Prettier, and TypeScript for type safety
 
 ## Tech Stack
@@ -21,9 +22,10 @@ A modern newsletter subscription platform built with React, TypeScript, and Tail
 - **Frontend**: React 19, TypeScript, Tailwind CSS v4
 - **Routing**: Wouter (SPA routing with dynamic routes)
 - **UI Components**: shadcn/ui (Radix UI primitives)
-- **State Management**: React hooks with in-memory store (ready for API integration)
+- **State Management**: React Query (`@tanstack/react-query`) with backend API integration
 - **Build Tool**: Vite
 - **Internationalization**: react-i18next with automatic language detection
+- **Markdown Support**: `@uiw/react-md-editor` for admin post creation, `react-markdown` for rendering
 - **Code Quality**: ESLint, Prettier, TypeScript strict mode
 
 ## Local Development
@@ -92,39 +94,44 @@ A modern newsletter subscription platform built with React, TypeScript, and Tail
 │   │   │   ├── Header.tsx
 │   │   │   ├── Footer.tsx
 │   │   │   └── LanguageSwitcher.tsx
-│   │   ├── hooks/       # Custom React hooks
-│   │   ├── lib/         # Utilities and store
-│   │   │   ├── store.ts       # State management
+│   │   ├── hooks/       # Custom React hooks (useAuth, usePosts, useSubscribers, etc.)
+│   │   ├── lib/         # Utilities
 │   │   │   ├── config.ts      # Environment variable configuration
+│   │   │   ├── api-client.ts  # Centralized API client with auth and token refresh
+│   │   │   ├── queryClient.ts # React Query configuration
 │   │   │   ├── translations.ts # Backward compatibility wrapper
 │   │   │   ├── i18n.ts        # i18next configuration
-│   │   │   ├── planConfig.ts  # Plan configuration
-│   │   │   └── queryClient.ts # React Query setup (ready for API)
+│   │   │   └── planConfig.ts  # Plan configuration
+│   │   ├── models/      # TypeScript interfaces
+│   │   │   ├── post.ts        # Post model
+│   │   │   └── subscriber.ts  # Subscriber model (matches MongoDB schema)
 │   │   ├── locales/     # Translation JSON files (en, es, fr, de, zh, ja)
 │   │   ├── pages/       # Page components
 │   │   │   ├── admin/
-│   │   │   │   ├── admin-login.tsx
-│   │   │   │   └── admin-dashboard.tsx
+│   │   │   │   ├── AdminLogin.tsx
+│   │   │   │   └── AdminDashboard.tsx
 │   │   │   └── user/
-│   │   │       ├── home.tsx
-│   │   │       ├── posts.tsx
-│   │   │       ├── post-detail.tsx
-│   │   │       ├── payment.tsx
-│   │   │       ├── privacy.tsx
-│   │   │       ├── terms.tsx
-│   │   │       └── not-found.tsx
+│   │   │       ├── Home.tsx
+│   │   │       ├── Posts.tsx
+│   │   │       ├── PostDetail.tsx
+│   │   │       ├── Payment.tsx
+│   │   │       ├── Privacy.tsx
+│   │   │       ├── Terms.tsx
+│   │   │       └── NotFound.tsx
 │   │   ├── App.tsx      # Main app with routing
 │   │   ├── index.css    # Global styles & design tokens
 │   │   └── main.tsx     # Entry point
 │   └── index.html       # HTML template
 ├── assets/              # Brand assets (logo, favicon) - accessed via @assets alias
-├── .env                 # Environment variables (gitignored)
-├── .env.example         # Example environment variables template
+├── .env                 # Environment variables for local development (committed)
 ├── docs/
-│   ├── BACKEND_API.md        # Backend API endpoint documentation
-│   ├── DEPLOYMENT_STRATEGY.md # Deployment guide for custom domain
-│   ├── I18N_SETUP.md         # Internationalization setup guide
-│   └── GITHUB_SETUP.md       # GitHub branch protection and CI/CD setup
+│   ├── backend-newsltter-api-integration.md # Complete backend API integration guide
+│   ├── DEPLOYMENT_STRATEGY.md               # Deployment guide for custom domain
+│   ├── I18N_SETUP.md                       # Internationalization setup guide
+│   ├── GITHUB_SETUP.md                     # GitHub branch protection and CI/CD setup
+│   ├── QUERY_FETCH_BEHAVIOR.md             # React Query fetch behavior documentation
+│   ├── COMPONENT_NAMING_CONVENTION.md      # Component naming standards
+│   └── ASYNC_PERFORMANCE_AUDIT.md          # Async operations audit
 ├── .github/workflows/  # CI/CD workflows
 │   ├── lint.yml        # Linting and type checking workflow
 │   └── deploy.yml      # Build and deployment workflow
@@ -149,12 +156,23 @@ A modern newsletter subscription platform built with React, TypeScript, and Tail
 
 ## Admin Access
 
-The admin panel is accessible at `/admin` with the following credentials:
+The admin panel is accessible at `/admin` and requires authentication via the FastAPI backend.
 
-- **Username**: `admin`
-- **Password**: `admin123`
+**Authentication Flow**:
+- Login at `/admin` using admin credentials
+- Backend returns JWT access and refresh tokens
+- Tokens are stored (access token in sessionStorage, refresh token in localStorage)
+- All API calls include the access token in the Authorization header
+- Automatic token refresh on 401 responses
+- Logout clears tokens and redirects to login
 
-> Note: This is a frontend mockup using local state. In production, implement proper authentication via the FastAPI backend (see [Backend API Documentation](docs/BACKEND_API.md)).
+**Admin Features**:
+- Full CRUD operations for posts (create, edit, delete)
+- Markdown editor for post content
+- Subscriber management (view, toggle status, change plan)
+- Plan configuration (set most popular plan, disable plans)
+
+> See [Backend API Integration Documentation](docs/backend-newsltter-api-integration.md) for complete authentication and authorization details.
 
 ## Internationalization
 
@@ -246,7 +264,7 @@ const loginUrl = getApiEndpoint('/api/auth/login');
 // If empty: /api/auth/login (relative URL)
 ```
 
-The `apiRequest` function in `queryClient.ts` automatically uses the configured backend URL when making API calls.
+The API client in `client/src/lib/api-client.ts` automatically uses the configured backend URL when making API calls.
 
 ### Best Practices
 
@@ -269,15 +287,43 @@ For production deployments (Vercel, Netlify, etc.), set environment variables in
 
 ## Backend Integration
 
-This frontend is designed to connect with a FastAPI backend. See [Backend API Documentation](docs/BACKEND_API.md) for complete endpoint specifications. The frontend uses React Query (`@tanstack/react-query`) which is already configured for API integration.
+This frontend is fully integrated with a FastAPI backend using React Query (`@tanstack/react-query`). See [Backend API Integration Documentation](docs/backend-newsltter-api-integration.md) for complete endpoint specifications.
+
+### API Client Architecture
+
+**Centralized API Client** (`client/src/lib/api-client.ts`):
+- Handles all backend API calls
+- Manages authentication tokens (JWT access and refresh tokens)
+- Automatic token refresh on 401 responses
+- Transforms backend data to match frontend models
+- Error handling and token management
+
+**React Query Hooks** (`client/src/hooks/`):
+- `useAuth.ts` - Authentication hooks (login, logout, current user, admin check)
+- `usePosts.ts` - Post CRUD operations (list, get, create, update, delete)
+- `useSubscribers.ts` - Subscriber management (list, create, update, delete)
+- `useSubscriptions.ts` - Subscription creation
+
+**Query Fetch Behavior**:
+- All queries fetch **only once on initial load**
+- Subsequent component mounts use cached data (no API calls)
+- Optimistic updates for mutations (instant UI feedback)
+- Automatic error handling and rollback on mutation failures
+- See [Query Fetch Behavior Documentation](docs/QUERY_FETCH_BEHAVIOR.md) for details
 
 **API Configuration**:
 - All API requests use the `VITE_API_URL` environment variable for the backend base URL
+- API endpoints are automatically prefixed with `/api/newsletter`
 - If `VITE_API_URL` is not set, API calls use relative URLs (same origin)
-- The `apiRequest` and `getQueryFn` functions in `queryClient.ts` automatically construct full URLs based on the configuration
 - See `client/src/lib/config.ts` for configuration utilities
 
-Current state management uses local in-memory store and will be replaced with API calls when the backend is implemented.
+### Data Models
+
+Frontend models (`client/src/models/`) match the backend MongoDB schema:
+- **Post**: `id`, `title`, `content` (markdown), `excerpt`, `createdAt`, `published`
+- **Subscriber**: `_id`, `email`, `name`, `is_active`, `plan_id`, `subscribed_at`, `unsubscribed_at`
+
+All API responses are transformed to match these models automatically by the API client.
 
 ## Deployment
 
@@ -354,11 +400,44 @@ To add a new language or modify text:
 3. Add the language code to `client/src/lib/i18n.ts` in the `supportedLngs` array
 4. The language will automatically appear in the language switcher
 
+### Using React Query Hooks
+
+All data fetching uses React Query hooks for optimal performance and caching:
+
+```typescript
+import { usePosts, usePost, useCreatePost } from '@/hooks/usePosts';
+import { useSubscribers } from '@/hooks/useSubscribers';
+import { useCurrentUser, useIsAdmin } from '@/hooks/useAuth';
+
+// List posts (fetches once, uses cache afterward)
+const { data: postsData, isLoading, error } = usePosts(true); // published only
+
+// Get single post (fetches once, uses cache afterward)
+const { data: post } = usePost(postId);
+
+// Create post mutation (with optimistic updates)
+const createPost = useCreatePost();
+createPost.mutate({ title, content, excerpt, published: true });
+
+// Check authentication
+const { data: user } = useCurrentUser();
+const isAdmin = useIsAdmin();
+```
+
+**Key Behavior**:
+- Queries fetch **only once on initial load** (see [Query Fetch Behavior](docs/QUERY_FETCH_BEHAVIOR.md))
+- Subsequent component mounts use cached data (no API calls)
+- Mutations provide optimistic updates for instant UI feedback
+- Automatic error handling and rollback on failures
+- No need for `useEffect` wrappers - React Query handles everything automatically
+
 ## Development Notes
 
 - **SPA Routing**: All routes are handled client-side. The `vercel.json` ensures proper routing in production.
-- **State Management**: Currently uses local React state. Ready for API integration via React Query.
-- **Type Safety**: Full TypeScript support with strict type checking.
+- **State Management**: Fully integrated with backend API using React Query hooks. All queries fetch once on initial load, with cached data for subsequent renders.
+- **Component Naming**: All React components follow PascalCase naming convention (e.g., `AdminDashboard.tsx` exports `AdminDashboard`). See [Component Naming Convention](docs/COMPONENT_NAMING_CONVENTION.md).
+- **Async Operations**: All client-to-server calls are asynchronous to prevent UI blocking. See [Async Performance Audit](docs/ASYNC_PERFORMANCE_AUDIT.md).
+- **Type Safety**: Full TypeScript support with strict type checking. Frontend models match backend MongoDB schema.
 - **Component Library**: Uses shadcn/ui components built on Radix UI primitives.
 - **Code Quality**: All code must pass ESLint, Prettier, and TypeScript checks before merging (enforced by GitHub Actions).
 

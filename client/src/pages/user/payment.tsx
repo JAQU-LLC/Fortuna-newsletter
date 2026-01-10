@@ -5,10 +5,11 @@ import { Footer } from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '@/hooks/useToast';
 import { CreditCard, Lock, CheckCircle2, ArrowLeft } from 'lucide-react';
 import { Link } from 'wouter';
 import { useTranslation } from 'react-i18next';
+import { useCreateSubscription } from '@/hooks/useSubscriptions';
 
 export default function Payment() {
   const { t } = useTranslation();
@@ -17,6 +18,7 @@ export default function Payment() {
   const planId = (params.get('plan') || 'free') as 'free' | 'standard' | 'premium';
   const [, setLocation] = useLocation();
   const { toast } = useToast();
+  const createSubscriptionMutation = useCreateSubscription();
   
   // TODO: Payment integration with Stripe is coming soon
   // For now, only free plan is enabled
@@ -26,9 +28,6 @@ export default function Payment() {
   const planName = t(`payment.planDetails.${planId}.name`);
   const planPrice = t(`payment.planDetails.${planId}.price`);
   const planFeatures = t(`payment.planDetails.${planId}.features`, { returnObjects: true }) as string[];
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isComplete, setIsComplete] = useState(false);
 
   const [form, setForm] = useState({
     name: '',
@@ -51,19 +50,24 @@ export default function Payment() {
     }
     
     if (!form.name || !form.email) {
-      toast({ title: t('payment.messages.fillRequiredFields'), variant: 'destructive' });
+      toast({ 
+        title: t('payment.messages.fillRequiredFields', { defaultValue: 'Please fill in all required fields' }), 
+        variant: 'destructive' 
+      });
       return;
     }
-    setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsComplete(true);
-      toast({ 
-        title: t('payment.messages.subscriptionSuccessful'), 
-        description: t('payment.messages.subscriptionSuccessDescription', { planName }) 
-      });
-    }, 1500);
+
+    // Create subscription via API
+    createSubscriptionMutation.mutate({
+      email: form.email,
+      name: form.name,
+      plan_id: planId,
+      // payment_details omitted for free plan
+    });
   };
+
+  // Show success page if subscription was created successfully
+  const isComplete = createSubscriptionMutation.isSuccess;
 
   if (isComplete) {
     return (
@@ -203,8 +207,13 @@ export default function Payment() {
                     </>
                   )}
 
-                  <Button type="submit" className="w-full h-12 rounded-xl font-semibold" disabled={isSubmitting} data-testid="button-subscribe">
-                    {isSubmitting 
+                  <Button 
+                    type="submit" 
+                    className="w-full h-12 rounded-xl font-semibold" 
+                    disabled={createSubscriptionMutation.isPending || createSubscriptionMutation.isSuccess} 
+                    data-testid="button-subscribe"
+                  >
+                    {createSubscriptionMutation.isPending
                       ? t('payment.buttons.processing') 
                       : planId === 'free' 
                         ? t('payment.buttons.startFreePlan') 
