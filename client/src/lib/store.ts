@@ -1,28 +1,13 @@
 import { useState, useEffect, createContext, useContext } from 'react';
-
-export interface Subscriber {
-  id: string;
-  name: string;
-  email: string;
-  subscribedAt: Date;
-  active: boolean;
-}
-
-export interface Post {
-  id: string;
-  title: string;
-  content: string;
-  excerpt: string;
-  createdAt: Date;
-  published: boolean;
-}
+import { Subscriber } from '@/models/subscriber';
+import { Post } from '@/models/post';
 
 const initialSubscribers: Subscriber[] = [
-  { id: '1', name: 'John Smith', email: 'john@example.com', subscribedAt: new Date('2024-01-15'), active: true },
-  { id: '2', name: 'Sarah Johnson', email: 'sarah.j@company.org', subscribedAt: new Date('2024-02-20'), active: true },
-  { id: '3', name: 'Mike Chen', email: 'mike.chen@startup.io', subscribedAt: new Date('2024-03-10'), active: true },
-  { id: '4', name: 'Emily Davis', email: 'emily@techfirm.com', subscribedAt: new Date('2024-03-25'), active: false },
-  { id: '5', name: 'Alex Rodriguez', email: 'alex.r@enterprise.net', subscribedAt: new Date('2024-04-05'), active: true },
+  { _id: '1', email: 'john@example.com', name: 'John Smith', is_active: true, subscribed_at: '2024-01-15T00:00:00.000Z', unsubscribed_at: null },
+  { _id: '2', email: 'sarah.j@company.org', name: 'Sarah Johnson', is_active: true, subscribed_at: '2024-02-20T00:00:00.000Z', unsubscribed_at: null },
+  { _id: '3', email: 'mike.chen@startup.io', name: 'Mike Chen', is_active: true, subscribed_at: '2024-03-10T00:00:00.000Z', unsubscribed_at: null },
+  { _id: '4', email: 'emily@techfirm.com', name: 'Emily Davis', is_active: false, subscribed_at: '2024-03-25T00:00:00.000Z', unsubscribed_at: '2024-04-01T00:00:00.000Z' },
+  { _id: '5', email: 'alex.r@enterprise.net', name: 'Alex Rodriguez', is_active: true, subscribed_at: '2024-04-05T00:00:00.000Z', unsubscribed_at: null },
 ];
 
 const initialPosts: Post[] = [
@@ -59,27 +44,48 @@ export function useStore() {
 
   const addSubscriber = (name: string, email: string) => {
     const newSubscriber: Subscriber = {
-      id: Date.now().toString(),
-      name,
+      _id: Date.now().toString(),
       email,
-      subscribedAt: new Date(),
-      active: true,
+      name,
+      is_active: true,
+      subscribed_at: new Date().toISOString(),
+      unsubscribed_at: null,
     };
     setSubscribers(prev => [...prev, newSubscriber]);
   };
 
   const toggleSubscriberStatus = (id: string) => {
     setSubscribers(prev =>
-      prev.map(sub => (sub.id === id ? { ...sub, active: !sub.active } : sub))
+      prev.map(sub => {
+        if (sub._id === id) {
+          const isActive = !sub.is_active;
+          return {
+            ...sub,
+            is_active: isActive,
+            unsubscribed_at: isActive ? null : new Date().toISOString(),
+          };
+        }
+        return sub;
+      })
     );
   };
 
   const addPost = (title: string, content: string) => {
+    // Strip markdown formatting for excerpt (simple approach)
+    const plainText = content
+      .replace(/#{1,6}\s+/g, '') // Remove headers
+      .replace(/\*\*(.*?)\*\*/g, '$1') // Remove bold
+      .replace(/\*(.*?)\*/g, '$1') // Remove italic
+      .replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1') // Remove links, keep text
+      .replace(/`([^`]+)`/g, '$1') // Remove inline code
+      .replace(/\n+/g, ' ') // Replace newlines with spaces
+      .trim();
+    
     const newPost: Post = {
       id: Date.now().toString(),
       title,
       content,
-      excerpt: content.substring(0, 150) + '...',
+      excerpt: plainText.substring(0, 150) + (plainText.length > 150 ? '...' : ''),
       createdAt: new Date(),
       published: true,
     };

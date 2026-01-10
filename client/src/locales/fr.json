@@ -119,7 +119,9 @@
       "fillRequiredFields": "Veuillez remplir tous les champs requis",
       "enterPaymentDetails": "Veuillez entrer les détails de paiement",
       "subscriptionSuccessful": "Abonnement réussi !",
-      "subscriptionSuccessDescription": "Vous êtes maintenant sur le plan {{planName}}."
+      "subscriptionSuccessDescription": "Vous êtes maintenant sur le plan {{planName}}.",
+      "paymentComingSoon": "Paiement Bientôt Disponible",
+      "stripeIntegration": "L'intégration des paiements Stripe est en cours de développement. Revenez bientôt pour les abonnements au plan {{planName}}!"
     }
   },
   "admin": {
@@ -181,6 +183,7 @@
           "content": "Écrivez le contenu de votre publication ici..."
         },
         "publish": "Publier la Publication",
+        "markdownHint": "Vous pouvez utiliser le formatage Markdown. Cliquez sur l'icône de l'œil pour prévisualiser.",
         "messages": {
           "fillAllFields": "Veuillez remplir tous les champs",
           "postPublished": "Publication publiée !",

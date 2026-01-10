@@ -119,7 +119,9 @@
       "fillRequiredFields": "請填寫所有必填字段",
       "enterPaymentDetails": "請輸入支付詳情",
       "subscriptionSuccessful": "訂閱成功！",
-      "subscriptionSuccessDescription": "您現在是 {{planName}} 計劃。"
+      "subscriptionSuccessDescription": "您現在是 {{planName}} 計劃。",
+      "paymentComingSoon": "支付即將推出",
+      "stripeIntegration": "Stripe 支付集成正在開發中。請稍後再來查看 {{planName}} 計劃訂閱！"
     }
   },
   "admin": {
@@ -181,6 +183,7 @@
           "content": "在此處編寫您的文章內容..."
         },
         "publish": "發佈文章",
+        "markdownHint": "您可以使用 Markdown 格式。點擊眼睛圖標以預覽。",
         "messages": {
           "fillAllFields": "請填寫所有字段",
           "postPublished": "文章已發佈！",

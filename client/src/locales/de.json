@@ -119,7 +119,9 @@
       "fillRequiredFields": "Bitte füllen Sie alle erforderlichen Felder aus",
       "enterPaymentDetails": "Bitte geben Sie die Zahlungsdetails ein",
       "subscriptionSuccessful": "Abonnement erfolgreich!",
-      "subscriptionSuccessDescription": "Sie sind jetzt im {{planName}} Plan."
+      "subscriptionSuccessDescription": "Sie sind jetzt im {{planName}} Plan.",
+      "paymentComingSoon": "Zahlung Demnächst Verfügbar",
+      "stripeIntegration": "Die Stripe-Zahlungsintegration wird derzeit entwickelt. Bitte schauen Sie bald wieder vorbei für {{planName}} Plan-Abonnements!"
     }
   },
   "admin": {
@@ -181,6 +183,7 @@
           "content": "Schreiben Sie Ihren Beitragsinhalt hier..."
         },
         "publish": "Beitrag veröffentlichen",
+        "markdownHint": "Sie können Markdown-Formatierung verwenden. Klicken Sie auf das Augen-Symbol, um eine Vorschau anzuzeigen.",
         "messages": {
           "fillAllFields": "Bitte füllen Sie alle Felder aus",
           "postPublished": "Beitrag veröffentlicht!",

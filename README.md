@@ -46,12 +46,26 @@ A modern newsletter subscription platform built with React, TypeScript, and Tail
    npm install
    ```
 
-3. **Start the development server**
+3. **Environment variables**
+   
+   The project uses a single `.env` file for local development:
+   
+   - **`.env`** - Local development configuration (committed to git)
+   - Pre-configured with `VITE_API_URL=http://localhost:8000` for local development
+   
+   **Note**: 
+   - The `.env` file is committed to git as a template for local development
+   - Environment variables must be prefixed with `VITE_` to be exposed to the client
+   - For production, set environment variables in your deployment platform (Vercel, Netlify, etc.)
+   - Production environment variables override `.env` during build
+   - See [Environment Variables](#environment-variables) section for more details
+
+4. **Start the development server**
    ```bash
    npm run dev
    ```
 
-4. **Open in browser**
+5. **Open in browser**
    Navigate to `http://localhost:5000`
 
 ### Available Scripts
@@ -81,6 +95,7 @@ A modern newsletter subscription platform built with React, TypeScript, and Tail
 │   │   ├── hooks/       # Custom React hooks
 │   │   ├── lib/         # Utilities and store
 │   │   │   ├── store.ts       # State management
+│   │   │   ├── config.ts      # Environment variable configuration
 │   │   │   ├── translations.ts # Backward compatibility wrapper
 │   │   │   ├── i18n.ts        # i18next configuration
 │   │   │   ├── planConfig.ts  # Plan configuration
@@ -103,6 +118,8 @@ A modern newsletter subscription platform built with React, TypeScript, and Tail
 │   │   └── main.tsx     # Entry point
 │   └── index.html       # HTML template
 ├── assets/              # Brand assets (logo, favicon) - accessed via @assets alias
+├── .env                 # Environment variables (gitignored)
+├── .env.example         # Example environment variables template
 ├── docs/
 │   ├── BACKEND_API.md        # Backend API endpoint documentation
 │   ├── DEPLOYMENT_STRATEGY.md # Deployment guide for custom domain
@@ -179,9 +196,86 @@ npm run format
 npm run check
 ```
 
+## Environment Variables
+
+The project uses Vite's environment variable system following [Vite's official best practices](https://vite.dev/config/#using-environment-variables-in-config). All environment variables must be prefixed with `VITE_` to be exposed to the client.
+
+### Environment File Structure
+
+The project uses a single `.env` file for local development:
+
+| File | When Loaded | Git Status | Purpose |
+|------|-------------|------------|---------|
+| `.env` | Always (local dev) | ✅ Committed | Local development configuration |
+
+**Note**: 
+- `.env` is used for local development only
+- Production environment variables are set via deployment platform (Vercel, Netlify, etc.)
+- Vite also supports `.env.local` for local overrides (gitignored)
+
+### Available Variables
+
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `VITE_API_URL` | Backend API base URL | `http://localhost:8000` (dev) or `https://api.fortuna.ai` (prod) |
+
+### File Example
+
+**`.env`** (local development - committed):
+```bash
+# Local development environment variables
+# This file is used for local development only
+# Production environment variables are set via deployment platform (Vercel, Netlify, etc.)
+VITE_API_URL=http://localhost:8000
+```
+
+### Usage in Code
+
+Environment variables are accessed through the `config.ts` utility:
+
+```typescript
+import { getApiUrl, getApiEndpoint } from '@/lib/config';
+
+// Get the base API URL (reads from .env for local dev, or deployment platform for production)
+const apiUrl = getApiUrl(); 
+
+// Get a full API endpoint URL
+const loginUrl = getApiEndpoint('/api/auth/login');
+// Local dev: http://localhost:8000/api/auth/login (from .env)
+// Production: https://api.fortuna.ai/api/auth/login (from deployment platform)
+// If empty: /api/auth/login (relative URL)
+```
+
+The `apiRequest` function in `queryClient.ts` automatically uses the configured backend URL when making API calls.
+
+### Best Practices
+
+1. **Commit `.env`**: The `.env` file is committed as a template for local development
+2. **Production variables**: Set via CI/CD platform (Vercel, Netlify, etc.) - these override `.env` during build
+3. **Local overrides**: If needed, create `.env.local` (gitignored) for developer-specific settings
+4. **Never commit secrets**: Only use `.env.local` for sensitive local-only values
+
+### Production Deployment
+
+For production deployments (Vercel, Netlify, etc.), set environment variables in your hosting platform's dashboard. These will override `.env` during build.
+
+**Vercel Example**:
+1. Go to Project Settings → Environment Variables
+2. Add `VITE_API_URL` with your production backend URL (e.g., `https://api.fortuna.ai`)
+3. Select environment (Production, Preview, Development)
+4. Redeploy the application
+
+**Note**: Vite loads `.env` files from the project root (where `vite.config.ts` is located), even if `root` is set to a subdirectory.
+
 ## Backend Integration
 
 This frontend is designed to connect with a FastAPI backend. See [Backend API Documentation](docs/BACKEND_API.md) for complete endpoint specifications. The frontend uses React Query (`@tanstack/react-query`) which is already configured for API integration.
+
+**API Configuration**:
+- All API requests use the `VITE_API_URL` environment variable for the backend base URL
+- If `VITE_API_URL` is not set, API calls use relative URLs (same origin)
+- The `apiRequest` and `getQueryFn` functions in `queryClient.ts` automatically construct full URLs based on the configuration
+- See `client/src/lib/config.ts` for configuration utilities
 
 Current state management uses local in-memory store and will be replaced with API calls when the backend is implemented.
 

@@ -119,7 +119,9 @@
       "fillRequiredFields": "すべての必須項目を入力してください",
       "enterPaymentDetails": "支払い詳細を入力してください",
       "subscriptionSuccessful": "購読が成功しました！",
-      "subscriptionSuccessDescription": "{{planName}}プランになりました。"
+      "subscriptionSuccessDescription": "{{planName}}プランになりました。",
+      "paymentComingSoon": "支払い近日公開",
+      "stripeIntegration": "Stripe決済の統合は開発中です。{{planName}}プランの購読については、後日またご確認ください！"
     }
   },
   "admin": {
@@ -181,6 +183,7 @@
           "content": "投稿内容をここに書いてください..."
         },
         "publish": "投稿を公開",
+        "markdownHint": "Markdownフォーマットを使用できます。目のアイコンをクリックしてプレビューしてください。",
         "messages": {
           "fillAllFields": "すべてのフィールドを入力してください",
           "postPublished": "投稿が公開されました！",

@@ -4,3 +4,9 @@ dist
 server/public
 vite.config.ts.*
 *.tar.gz
+
+# Environment variables
+# .env is committed (for local development)
+# Only ignore local override files (contain secrets)
+.env.local
+.env.*.local

@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Sparkles, Check } from 'lucide-react';
 import { useLocation } from 'wouter';
 import { useTranslation } from 'react-i18next';
+import { useToast } from '@/hooks/use-toast';
 import { isPlanDisabled, isPlanPopular, type PlanId } from '@/lib/planConfig';
 
 const planIds: PlanId[] = ['free', 'standard', 'premium'];
@@ -11,12 +12,26 @@ const planIds: PlanId[] = ['free', 'standard', 'premium'];
 export default function Home() {
   const [, setLocation] = useLocation();
   const { t } = useTranslation();
+  const { toast } = useToast();
 
   const handleSelectPlan = (planId: string) => {
     if (isPlanDisabled(planId as PlanId)) {
       return; // Don't navigate if plan is disabled
     }
+    
+    // TODO: Payment integration with Stripe is coming soon
+    // For now, only free plan is available
+    if (planId === 'free') {
+      // Free plan - can proceed without payment
     setLocation(`/payment?plan=${planId}`);
+    } else {
+      // Paid plans (standard/premium) - payment not available yet
+      // Show message that Stripe integration is coming soon
+      toast({
+        title: t('payment.messages.paymentComingSoon', { defaultValue: 'Payment Coming Soon' }),
+        description: t('payment.messages.stripeIntegration', { defaultValue: 'Stripe payment integration is under development. Please check back soon!' }),
+      });
+    }
   };
 
   return (
@@ -33,9 +48,9 @@ export default function Home() {
             <span className="gradient-text">{t('home.titleBrand')}</span>
           </h1>
           {t('home.description') && (
-            <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto mb-16">
+          <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto mb-16">
               {t('home.description')}
-            </p>
+          </p>
           )}
 
           <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto items-stretch">
@@ -46,8 +61,9 @@ export default function Home() {
               const planDescription = t(`home.plans.${planId}.description`);
               const planFeatures = t(`home.plans.${planId}.features`, { returnObjects: true }) as string[];
               const planCta = t(`home.plans.${planId}.cta`);
-              const isPopular = isPlanPopular(planId);
               const isDisabled = isPlanDisabled(planId);
+              // A plan cannot be both popular and disabled - mutually exclusive
+              const isPopular = !isDisabled && isPlanPopular(planId);
               
               return (
                 <div
@@ -61,12 +77,14 @@ export default function Home() {
                   }`}
                   data-testid={`card-plan-${planId}`}
                 >
-                  {isPopular && (
+                  {/* Most Popular badge - only show if NOT disabled */}
+                  {isPopular && !isDisabled && (
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-primary text-primary-foreground text-xs font-semibold">
                       {t('home.mostPopular')}
                     </div>
                   )}
-                  {isDisabled && (
+                  {/* Coming Soon badge - only show if disabled (mutually exclusive with Most Popular) */}
+                  {isDisabled && !isPopular && (
                     <div className="absolute -top-3 right-4 px-3 py-1 rounded-full bg-muted text-muted-foreground text-xs font-semibold">
                       {t('common.comingSoon', { defaultValue: 'Coming Soon' })}
                     </div>
@@ -106,21 +124,21 @@ export default function Home() {
                   
                   {/* CTA Button - Always at bottom, aligned */}
                   <div className="mt-auto pt-4">
-                    <Button
-                      onClick={() => handleSelectPlan(planId)}
-                      disabled={isDisabled}
+                  <Button
+                    onClick={() => handleSelectPlan(planId)}
+                    disabled={isDisabled}
                       className={`w-full h-12 rounded-xl font-semibold ${
-                        isDisabled
-                          ? 'cursor-not-allowed'
-                          : isPopular 
-                            ? '' 
-                            : 'bg-secondary hover:bg-secondary/90'
-                      }`}
-                      variant={isDisabled ? 'secondary' : isPopular ? 'default' : 'secondary'}
-                      data-testid={`button-select-${planId}`}
-                    >
+                      isDisabled
+                        ? 'cursor-not-allowed'
+                        : isPopular 
+                          ? '' 
+                          : 'bg-secondary hover:bg-secondary/90'
+                    }`}
+                    variant={isDisabled ? 'secondary' : isPopular ? 'default' : 'secondary'}
+                    data-testid={`button-select-${planId}`}
+                  >
                       {isDisabled ? t('common.comingSoon', { defaultValue: 'Coming Soon' }) : planCta}
-                    </Button>
+                  </Button>
                   </div>
                 </div>
               );

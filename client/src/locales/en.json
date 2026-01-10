@@ -119,7 +119,9 @@
       "fillRequiredFields": "Please fill in all required fields",
       "enterPaymentDetails": "Please enter payment details",
       "subscriptionSuccessful": "Subscription successful!",
-      "subscriptionSuccessDescription": "You're now on the {{planName}} plan."
+      "subscriptionSuccessDescription": "You're now on the {{planName}} plan.",
+      "paymentComingSoon": "Payment Coming Soon",
+      "stripeIntegration": "Stripe payment integration is under development. Please check back soon for {{planName}} plan subscriptions!"
     }
   },
   "admin": {
@@ -181,6 +183,7 @@
           "content": "Write your post content here..."
         },
         "publish": "Publish Post",
+        "markdownHint": "You can use Markdown formatting. Click the eye icon to preview.",
         "messages": {
           "fillAllFields": "Please fill in all fields",
           "postPublished": "Post published!",

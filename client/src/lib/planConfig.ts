@@ -47,6 +47,10 @@ export function isPlanDisabled(planId: PlanId): boolean {
 
 export function isPlanPopular(planId: PlanId): boolean {
   const config = getPlanConfig();
+  // A plan cannot be both popular and disabled - mutually exclusive
+  if (config.disabledPlans.includes(planId)) {
+    return false;
+  }
   return config.mostPopular === planId;
 }
 

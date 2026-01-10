@@ -15,14 +15,18 @@ export default function Payment() {
   const searchString = useSearch();
   const params = new URLSearchParams(searchString);
   const planId = (params.get('plan') || 'free') as 'free' | 'standard' | 'premium';
+  const [, setLocation] = useLocation();
+  const { toast } = useToast();
+  
+  // TODO: Payment integration with Stripe is coming soon
+  // For now, only free plan is enabled
+  const isPaymentEnabled = planId === 'free';
   
   // Get plan details from translations
   const planName = t(`payment.planDetails.${planId}.name`);
   const planPrice = t(`payment.planDetails.${planId}.price`);
   const planFeatures = t(`payment.planDetails.${planId}.features`, { returnObjects: true }) as string[];
 
-  const [, setLocation] = useLocation();
-  const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
 
@@ -36,12 +40,18 @@ export default function Payment() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.name || !form.email) {
-      toast({ title: t('payment.messages.fillRequiredFields'), variant: 'destructive' });
+    
+    // Only allow free plan subscriptions for now
+    if (!isPaymentEnabled) {
+      toast({ 
+        title: t('payment.messages.paymentComingSoon', { defaultValue: 'Payment Coming Soon' }), 
+        description: t('payment.messages.stripeIntegration', { defaultValue: 'Stripe payment integration is under development. Please check back soon!' }),
+      });
       return;
     }
-    if (planId !== 'free' && (!form.cardNumber || !form.expiry || !form.cvc)) {
-      toast({ title: t('payment.messages.enterPaymentDetails'), variant: 'destructive' });
+    
+    if (!form.name || !form.email) {
+      toast({ title: t('payment.messages.fillRequiredFields'), variant: 'destructive' });
       return;
     }
     setIsSubmitting(true);
@@ -70,6 +80,32 @@ export default function Payment() {
             </p>
             <Button onClick={() => setLocation('/posts')} className="h-12 px-8 rounded-xl" data-testid="button-view-posts">
               {t('payment.success.viewPosts')}
+            </Button>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  // Show coming soon message for paid plans
+  if (!isPaymentEnabled) {
+    return (
+      <div className="min-h-screen bg-background flex flex-col">
+        <Header />
+        <main className="pt-24 pb-16 flex items-center justify-center flex-1">
+          <div className="max-w-md w-full mx-6 text-center">
+            <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Lock className="w-10 h-10 text-primary" />
+            </div>
+            <h1 className="font-display text-3xl font-bold mb-4">
+              {t('payment.messages.paymentComingSoon', { defaultValue: 'Payment Coming Soon' })}
+            </h1>
+            <p className="text-muted-foreground mb-8">
+              {t('payment.messages.stripeIntegration', { planName, defaultValue: `Stripe payment integration is under development. Please check back soon for ${planName} plan subscriptions!` })}
+            </p>
+            <Button onClick={() => setLocation('/')} className="h-12 px-8 rounded-xl" data-testid="button-back-home">
+              {t('payment.backToPlans')}
             </Button>
           </div>
         </main>
@@ -176,10 +212,12 @@ export default function Payment() {
                     }
                   </Button>
 
+                  {planId !== 'free' && (
                   <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
                     <Lock className="w-3 h-3" />
-                    {t('payment.secureCheckout')}
+                      {t('payment.secureCheckout')}
                   </div>
+                  )}
                 </form>
               </div>
             </div>

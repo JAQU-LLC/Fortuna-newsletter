@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useLocation, Link } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
@@ -17,13 +16,16 @@ import {
   Home,
   Settings,
 } from 'lucide-react';
-import { Subscriber, Post } from '@/lib/store';
+import { Subscriber } from '@/models/subscriber';
+import { Post } from '@/models/post';
 import { format } from 'date-fns';
 import logoUrl from '@assets/logo.png';
 import { useTranslation } from 'react-i18next';
 import { getPlanConfig, setPlanConfig, type PlanId, type PlanConfig } from '@/lib/planConfig';
 import { Checkbox } from '@/components/ui/checkbox';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import MDEditor from '@uiw/react-md-editor';
+import '@uiw/react-md-editor/markdown-editor.css';
 
 interface AdminDashboardProps {
   isAdmin: boolean;
@@ -93,17 +95,27 @@ export default function AdminDashboard({
   };
 
   const handleMostPopularChange = (planId: PlanId | null) => {
-    handlePlanConfigChange({ ...planConfig, mostPopular: planId });
+    // If setting a plan as most popular, remove it from disabled plans (mutually exclusive)
+    const disabledPlans = planId 
+      ? planConfig.disabledPlans.filter(id => id !== planId)
+      : planConfig.disabledPlans;
+    handlePlanConfigChange({ ...planConfig, mostPopular: planId, disabledPlans });
   };
 
   const handleDisabledPlansChange = (planId: PlanId, disabled: boolean) => {
     const disabledPlans = disabled
       ? [...planConfig.disabledPlans, planId]
       : planConfig.disabledPlans.filter(id => id !== planId);
-    handlePlanConfigChange({ ...planConfig, disabledPlans });
+    
+    // If disabling a plan, remove it from most popular (mutually exclusive)
+    const mostPopular = disabled && planConfig.mostPopular === planId 
+      ? null 
+      : planConfig.mostPopular;
+    
+    handlePlanConfigChange({ ...planConfig, disabledPlans, mostPopular });
   };
 
-  const activeCount = subscribers.filter((s) => s.active).length;
+  const activeCount = subscribers.filter((s) => s.is_active).length;
 
   return (
     <div className="min-h-screen bg-muted/30">
@@ -214,16 +226,25 @@ export default function AdminDashboard({
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="content" className="text-sm font-medium">
-                    {t('admin.dashboard.writePost.labels.postContent')}
+                    {t('admin.dashboard.writePost.labels.postContent')} (Markdown)
                   </Label>
-                  <Textarea
-                    id="content"
-                    placeholder={t('admin.dashboard.writePost.placeholders.content')}
-                    value={postContent}
-                    onChange={(e) => setPostContent(e.target.value)}
-                    className="min-h-[300px] px-4 py-3 rounded-xl resize-none"
-                    data-testid="input-post-content"
-                  />
+                  <div data-color-mode="light" className="[&_.w-md-editor]:rounded-xl [&_.w-md-editor-text]:min-h-[300px]">
+                    <MDEditor
+                      value={postContent}
+                      onChange={(value: string | undefined) => setPostContent(value || '')}
+                      preview="edit"
+                      hideToolbar={false}
+                      visibleDragbar={false}
+                      textareaProps={{
+                        placeholder: t('admin.dashboard.writePost.placeholders.content'),
+                        style: { fontSize: '14px', fontFamily: 'inherit' },
+                      }}
+                      data-testid="input-post-content"
+                    />
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    {t('admin.dashboard.writePost.markdownHint', { defaultValue: 'You can use Markdown formatting. Click the eye icon to preview.' })}
+                  </p>
                 </div>
                 <Button
                   onClick={handlePublishPost}
@@ -280,40 +301,40 @@ export default function AdminDashboard({
                   <tbody className="divide-y divide-border">
                     {filteredSubscribers.map((subscriber) => (
                       <tr
-                        key={subscriber.id}
+                        key={subscriber._id}
                         className="hover:bg-muted/30 transition-colors"
-                        data-testid={`row-subscriber-${subscriber.id}`}
+                        data-testid={`row-subscriber-${subscriber._id}`}
                       >
                         <td className="px-6 py-4 text-sm font-medium">
                           {subscriber.name}
                         </td>
-                        <td className="px-6 py-4 text-sm text-muted-foreground" data-testid={`text-email-${subscriber.id}`}>
+                        <td className="px-6 py-4 text-sm text-muted-foreground" data-testid={`text-email-${subscriber._id}`}>
                           {subscriber.email}
                         </td>
                         <td className="px-6 py-4 text-sm text-muted-foreground">
-                          {format(new Date(subscriber.subscribedAt), 'MMM d, yyyy')}
+                          {format(new Date(subscriber.subscribed_at), 'MMM d, yyyy')}
                         </td>
                         <td className="px-6 py-4">
                           <span
                             className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
-                              subscriber.active
+                              subscriber.is_active
                                 ? 'bg-green-100 text-green-700'
                                 : 'bg-red-100 text-red-700'
                             }`}
-                            data-testid={`status-subscriber-${subscriber.id}`}
+                            data-testid={`status-subscriber-${subscriber._id}`}
                           >
-                            {subscriber.active ? t('admin.dashboard.subscribers.status.active') : t('admin.dashboard.subscribers.status.inactive')}
+                            {subscriber.is_active ? t('admin.dashboard.subscribers.status.active') : t('admin.dashboard.subscribers.status.inactive')}
                           </span>
                         </td>
                         <td className="px-6 py-4 text-right">
                           <Button
-                            variant={subscriber.active ? 'destructive' : 'default'}
+                            variant={subscriber.is_active ? 'destructive' : 'default'}
                             size="sm"
-                            onClick={() => onToggleSubscriber(subscriber.id)}
+                            onClick={() => onToggleSubscriber(subscriber._id)}
                             className="h-9 px-4 rounded-lg"
-                            data-testid={`button-toggle-${subscriber.id}`}
+                            data-testid={`button-toggle-${subscriber._id}`}
                           >
-                            {subscriber.active ? (
+                            {subscriber.is_active ? (
                               <>
                                 <UserX className="w-4 h-4 mr-2" />
                                 {t('admin.dashboard.subscribers.actions.deactivate')}
@@ -360,14 +381,25 @@ export default function AdminDashboard({
                         None
                       </Label>
                     </div>
-                    {(['free', 'standard', 'premium'] as PlanId[]).map((planId) => (
-                      <div key={planId} className="flex items-center space-x-2">
-                        <RadioGroupItem value={planId} id={`popular-${planId}`} />
-                        <Label htmlFor={`popular-${planId}`} className="font-normal cursor-pointer">
-                          {t(`admin.dashboard.plans.plans.${planId}`)}
-                        </Label>
-                      </div>
-                    ))}
+                    {(['free', 'standard', 'premium'] as PlanId[]).map((planId) => {
+                      const isDisabled = planConfig.disabledPlans.includes(planId);
+                      return (
+                        <div key={planId} className="flex items-center space-x-2">
+                          <RadioGroupItem 
+                            value={planId} 
+                            id={`popular-${planId}`}
+                            disabled={isDisabled}
+                          />
+                          <Label 
+                            htmlFor={`popular-${planId}`} 
+                            className={`font-normal ${isDisabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}`}
+                          >
+                            {t(`admin.dashboard.plans.plans.${planId}`)}
+                            {isDisabled && ' (Disabled)'}
+                          </Label>
+                        </div>
+                      );
+                    })}
                   </RadioGroup>
                 </div>
 
@@ -376,18 +408,26 @@ export default function AdminDashboard({
                     {t('admin.dashboard.plans.disabledPlans')}
                   </Label>
                   <div className="space-y-3">
-                    {(['free', 'standard', 'premium'] as PlanId[]).map((planId) => (
-                      <div key={planId} className="flex items-center space-x-2">
-                        <Checkbox
-                          id={`disabled-${planId}`}
-                          checked={planConfig.disabledPlans.includes(planId)}
-                          onCheckedChange={(checked) => handleDisabledPlansChange(planId, checked === true)}
-                        />
-                        <Label htmlFor={`disabled-${planId}`} className="font-normal cursor-pointer">
-                          {t(`admin.dashboard.plans.plans.${planId}`)}
-                        </Label>
-                      </div>
-                    ))}
+                    {(['free', 'standard', 'premium'] as PlanId[]).map((planId) => {
+                      const isMostPopular = planConfig.mostPopular === planId;
+                      return (
+                        <div key={planId} className="flex items-center space-x-2">
+                          <Checkbox
+                            id={`disabled-${planId}`}
+                            checked={planConfig.disabledPlans.includes(planId)}
+                            onCheckedChange={(checked) => handleDisabledPlansChange(planId, checked === true)}
+                            disabled={isMostPopular}
+                          />
+                          <Label 
+                            htmlFor={`disabled-${planId}`} 
+                            className={`font-normal ${isMostPopular ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}`}
+                          >
+                            {t(`admin.dashboard.plans.plans.${planId}`)}
+                            {isMostPopular && ' (Most Popular)'}
+                          </Label>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               </div>

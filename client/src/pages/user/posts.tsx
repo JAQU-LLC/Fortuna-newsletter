@@ -1,6 +1,6 @@
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
-import { Post } from '@/lib/store';
+import { Post } from '@/models/post';
 import { Calendar, ArrowRight } from 'lucide-react';
 import { format } from 'date-fns';
 import { Link } from 'wouter';

@@ -5,6 +5,10 @@ import { format } from 'date-fns';
 import { Link, useRoute } from 'wouter';
 import { useStore } from '@/lib/store';
 import { useTranslation } from 'react-i18next';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw';
+import rehypeSanitize from 'rehype-sanitize';
 
 export default function PostDetail() {
   const { t } = useTranslation();
@@ -57,10 +61,13 @@ export default function PostDetail() {
             {post.title}
           </h1>
 
-          <div className="prose prose-lg max-w-none">
-            <div className="whitespace-pre-wrap text-muted-foreground leading-relaxed">
+          <div className="prose prose-lg max-w-none prose-headings:font-display prose-headings:text-foreground prose-p:text-muted-foreground prose-p:leading-relaxed prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-strong:text-foreground prose-code:text-foreground prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-muted prose-img:rounded-xl">
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              rehypePlugins={[rehypeRaw, rehypeSanitize]}
+            >
               {post.content}
-            </div>
+            </ReactMarkdown>
           </div>
         </article>
       </main>
