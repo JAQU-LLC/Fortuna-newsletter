@@ -3,7 +3,7 @@ import { QueryClient } from "@tanstack/react-query";
 /**
  * React Query client with proper defaults
  * All queries and mutations should use hooks that call api-client functions directly
- * 
+ *
  * Configuration ensures:
  * - Queries only fetch once on initial load
  * - Subsequent component mounts use cached data

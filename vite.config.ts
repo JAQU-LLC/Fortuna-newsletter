@@ -2,29 +2,34 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import path from "path";
+import { fileURLToPath } from "url";
 
-const projectRoot = import.meta.dirname;
+// Get the directory where vite.config.ts is located (project root)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const projectRoot = path.resolve(__dirname);
+const clientRoot = path.resolve(projectRoot, "client");
 const assetsPath = path.resolve(projectRoot, "assets");
 
 export default defineConfig({
-  plugins: [
-    react(),
-    tailwindcss(),
-  ],
+  plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
-      "@": path.resolve(projectRoot, "client", "src"),
+      // Alias @ to point to client/src (absolute path for reliability)
+      "@": path.resolve(clientRoot, "src"),
       "@assets": assetsPath,
     },
+    extensions: [".js", ".jsx", ".ts", ".tsx", ".json"],
   },
   css: {
     // Tailwind CSS v4 uses its own Vite plugin, no PostCSS config needed
   },
-  root: path.resolve(projectRoot, "client"),  // ah we are setting project root here. see if we are allowed to change this.
+  root: clientRoot, // Vite root is set to client directory
   build: {
     outDir: path.resolve(projectRoot, "dist/public"),
     emptyOutDir: true,
   },
+  // Note: Aliases are resolved relative to the root (client/), so @ points to client/src
   server: {
     host: "0.0.0.0",
     port: 5000,
@@ -32,8 +37,8 @@ export default defineConfig({
     open: false, // Don't auto-open browser
     proxy: {
       // Proxy /api/newsletter/* requests to backend server to avoid CORS issues
-      '/api/newsletter': {
-        target: 'http://localhost:8000',
+      "/api/newsletter": {
+        target: "http://localhost:8000",
         changeOrigin: true,
         secure: false,
         // Rewrite is not needed since we're forwarding the full path
@@ -50,7 +55,8 @@ export default defineConfig({
       // Static file serving is controlled by what's actually in the public directory
     },
   },
-  // When root is set to a subdirectory, Vite reads .env files from the directory containing vite.config.ts by default
-  // We explicitly set envDir to the root directory (client/) where .env should be located
-  envDir: path.resolve(projectRoot, "client"),
+  // envDir: Where Vite looks for .env files
+  // Since root is set to client/, and .env is in client/, we set envDir to clientRoot
+  // This ensures .env files are loaded correctly even when root is a subdirectory
+  envDir: clientRoot,
 });

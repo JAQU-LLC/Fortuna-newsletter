@@ -1,10 +1,10 @@
-import { Header } from '@/components/Header';
-import { Footer } from '@/components/Footer';
-import { Calendar, ArrowRight } from 'lucide-react';
-import { format } from 'date-fns';
-import { Link } from 'wouter';
-import { useTranslation } from 'react-i18next';
-import { usePosts } from '@/hooks/usePosts';
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
+import { Calendar, ArrowRight } from "lucide-react";
+import { format } from "date-fns";
+import { Link } from "wouter";
+import { useTranslation } from "react-i18next";
+import { usePosts } from "@/hooks/usePosts";
 
 export default function Posts() {
   const { t } = useTranslation();
@@ -16,7 +16,7 @@ export default function Posts() {
         <Header />
         <main className="pt-24 pb-16 flex-1 flex items-center justify-center">
           <div className="text-center text-muted-foreground">
-            <p>{t('common.loading', { defaultValue: 'Loading...' })}</p>
+            <p>{t("common.loading", { defaultValue: "Loading..." })}</p>
           </div>
         </main>
         <Footer />
@@ -30,7 +30,11 @@ export default function Posts() {
         <Header />
         <main className="pt-24 pb-16 flex-1 flex items-center justify-center">
           <div className="text-center text-muted-foreground">
-            <p>{t('posts.error', { defaultValue: 'Failed to load posts. Please try again later.' })}</p>
+            <p>
+              {t("posts.error", {
+                defaultValue: "Failed to load posts. Please try again later.",
+              })}
+            </p>
           </div>
         </main>
         <Footer />
@@ -47,10 +51,10 @@ export default function Posts() {
         <section className="max-w-4xl mx-auto px-6 py-12">
           <div className="text-center space-y-4 mb-16">
             <h1 className="font-display text-4xl lg:text-5xl font-bold">
-              {t('posts.title')}
+              {t("posts.title")}
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              {t('posts.description')}
+              {t("posts.description")}
             </p>
           </div>
 
@@ -63,7 +67,9 @@ export default function Posts() {
                 >
                   <div className="flex items-center gap-3 text-sm text-muted-foreground mb-4">
                     <Calendar className="w-4 h-4" />
-                    <time>{format(new Date(post.createdAt), 'MMMM d, yyyy')}</time>
+                    <time>
+                      {format(new Date(post.createdAt), "MMMM d, yyyy")}
+                    </time>
                   </div>
                   <h2 className="font-display text-2xl font-semibold mb-3 group-hover:text-primary transition-colors">
                     {post.title}
@@ -72,7 +78,7 @@ export default function Posts() {
                     {post.excerpt}
                   </p>
                   <div className="flex items-center gap-2 text-primary font-medium text-sm">
-                    {t('posts.readMore')}
+                    {t("posts.readMore")}
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </article>
@@ -81,7 +87,7 @@ export default function Posts() {
 
             {publishedPosts.length === 0 && (
               <div className="text-center py-16 text-muted-foreground">
-                <p>{t('posts.noPosts')}</p>
+                <p>{t("posts.noPosts")}</p>
               </div>
             )}
           </div>

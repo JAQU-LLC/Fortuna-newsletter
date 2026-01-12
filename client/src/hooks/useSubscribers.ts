@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   listSubscribersApi,
   createSubscriberApi,
@@ -8,22 +8,22 @@ import {
   ListSubscribersResponse,
   UpdateSubscriberData,
   type Subscriber,
-} from '@/lib/api-client';
-import { toast } from '@/hooks/useToast';
+} from "@/lib/api-client";
+import { toast } from "@/hooks/useToast";
 
 /**
  * Hook to list subscribers (admin only)
- * 
+ *
  * Note: This query only fetches once on initial load. Subsequent component mounts
  * will use cached data. The query will not refetch automatically.
  */
 export function useSubscribers(params?: ListSubscribersParams) {
   // Normalize params to prevent unnecessary refetches when object reference changes
   // Create a stable key from params values
-  const queryKey = params 
-    ? ['subscribers', params.skip ?? 0, params.limit ?? 100, params.is_active]
-    : ['subscribers'];
-  
+  const queryKey = params
+    ? ["subscribers", params.skip ?? 0, params.limit ?? 100, params.is_active]
+    : ["subscribers"];
+
   return useQuery<ListSubscribersResponse, Error>({
     queryKey,
     queryFn: async () => {
@@ -48,17 +48,17 @@ export function useCreateSubscriber() {
     },
     onSuccess: () => {
       // Invalidate subscribers list to refetch
-      queryClient.invalidateQueries({ queryKey: ['subscribers'] });
+      queryClient.invalidateQueries({ queryKey: ["subscribers"] });
       toast({
-        title: 'Subscriber added!',
-        description: 'New subscriber has been created.',
+        title: "Subscriber added!",
+        description: "New subscriber has been created.",
       });
     },
     onError: () => {
       toast({
-        title: 'Failed to create subscriber',
-        description: 'Unable to create subscriber. Please try again later.',
-        variant: 'destructive',
+        title: "Failed to create subscriber",
+        description: "Unable to create subscriber. Please try again later.",
+        variant: "destructive",
       });
     },
   });
@@ -81,17 +81,18 @@ export function useUpdateSubscriber() {
     },
     onMutate: async ({ id, data }) => {
       // Cancel outgoing refetches
-      await queryClient.cancelQueries({ queryKey: ['subscribers'] });
+      await queryClient.cancelQueries({ queryKey: ["subscribers"] });
 
       // Snapshot previous value for rollback
-      const previousSubscribers = queryClient.getQueryData<ListSubscribersResponse>(['subscribers']);
+      const previousSubscribers =
+        queryClient.getQueryData<ListSubscribersResponse>(["subscribers"]);
 
       // Optimistically update subscriber in list
       if (previousSubscribers) {
-        queryClient.setQueryData<ListSubscribersResponse>(['subscribers'], {
+        queryClient.setQueryData<ListSubscribersResponse>(["subscribers"], {
           ...previousSubscribers,
           subscribers: previousSubscribers.subscribers.map((sub) =>
-            sub._id === id ? { ...sub, ...data } as Subscriber : sub
+            sub._id === id ? ({ ...sub, ...data } as Subscriber) : sub
           ),
         });
       }
@@ -101,14 +102,14 @@ export function useUpdateSubscriber() {
     onError: () => {
       // Keep optimistic update per user preference (show error toast but don't rollback)
       toast({
-        title: 'Failed to update subscriber',
-        description: 'Unable to update subscriber. Please try again later.',
-        variant: 'destructive',
+        title: "Failed to update subscriber",
+        description: "Unable to update subscriber. Please try again later.",
+        variant: "destructive",
       });
     },
     onSuccess: () => {
       // Invalidate to ensure we have the latest from server
-      queryClient.invalidateQueries({ queryKey: ['subscribers'] });
+      queryClient.invalidateQueries({ queryKey: ["subscribers"] });
     },
   });
 }
@@ -130,16 +131,19 @@ export function useDeleteSubscriber() {
     },
     onMutate: async (id) => {
       // Cancel outgoing refetches
-      await queryClient.cancelQueries({ queryKey: ['subscribers'] });
+      await queryClient.cancelQueries({ queryKey: ["subscribers"] });
 
       // Snapshot previous value for rollback
-      const previousSubscribers = queryClient.getQueryData<ListSubscribersResponse>(['subscribers']);
+      const previousSubscribers =
+        queryClient.getQueryData<ListSubscribersResponse>(["subscribers"]);
 
       // Optimistically remove subscriber from list
       if (previousSubscribers) {
-        queryClient.setQueryData<ListSubscribersResponse>(['subscribers'], {
+        queryClient.setQueryData<ListSubscribersResponse>(["subscribers"], {
           ...previousSubscribers,
-          subscribers: previousSubscribers.subscribers.filter((sub) => sub._id !== id),
+          subscribers: previousSubscribers.subscribers.filter(
+            (sub) => sub._id !== id
+          ),
           total: previousSubscribers.total - 1,
         });
       }
@@ -149,22 +153,21 @@ export function useDeleteSubscriber() {
     onError: (error, id, context) => {
       // Rollback on error for delete operations
       if (context?.previousSubscribers) {
-        queryClient.setQueryData(['subscribers'], context.previousSubscribers);
+        queryClient.setQueryData(["subscribers"], context.previousSubscribers);
       }
       toast({
-        title: 'Failed to delete subscriber',
-        description: 'Unable to delete subscriber. Please try again later.',
-        variant: 'destructive',
+        title: "Failed to delete subscriber",
+        description: "Unable to delete subscriber. Please try again later.",
+        variant: "destructive",
       });
     },
     onSuccess: () => {
       // Invalidate to ensure we have the latest from server
-      queryClient.invalidateQueries({ queryKey: ['subscribers'] });
+      queryClient.invalidateQueries({ queryKey: ["subscribers"] });
       toast({
-        title: 'Subscriber deleted!',
-        description: 'The subscriber has been removed.',
+        title: "Subscriber deleted!",
+        description: "The subscriber has been removed.",
       });
     },
   });
 }
-

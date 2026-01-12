@@ -1,6 +1,6 @@
 // BACKWARD COMPATIBILITY FILE
 // This file maintains backward compatibility with existing components that use translations.home.title syntax
-// 
+//
 // IMPORTANT: New components should use react-i18next for auto-translation:
 //   import { useTranslation } from 'react-i18next';
 //   const { t } = useTranslation();
@@ -9,7 +9,7 @@
 // Components using this file will show English only (no auto-translation based on user's location)
 // To enable auto-translation, migrate to useTranslation hook (see docs/I18N_SETUP.md)
 
-import enTranslations from '@/locales/en.json';
+import enTranslations from "@/locales/en.json";
 
 // Create translations object with function support for backward compatibility
 // Note: This uses static English values - components need to migrate to useTranslation() for auto-translation
@@ -80,12 +80,13 @@ export const translations = {
     secureCheckout: enTranslations.payment.secureCheckout,
     orderSummary: {
       title: enTranslations.payment.orderSummary.title,
-      monthlySubscription: enTranslations.payment.orderSummary.monthlySubscription,
+      monthlySubscription:
+        enTranslations.payment.orderSummary.monthlySubscription,
       total: enTranslations.payment.orderSummary.total,
     },
     success: {
       title: enTranslations.payment.success.title,
-      message: (username: string, planName: string) => 
+      message: (username: string, planName: string) =>
         `Welcome, ${username}! Your ${planName} subscription is now active. Check your email for confirmation.`,
       viewPosts: enTranslations.payment.success.viewPosts,
     },
@@ -97,8 +98,9 @@ export const translations = {
     messages: {
       fillRequiredFields: enTranslations.payment.messages.fillRequiredFields,
       enterPaymentDetails: enTranslations.payment.messages.enterPaymentDetails,
-      subscriptionSuccessful: enTranslations.payment.messages.subscriptionSuccessful,
-      subscriptionSuccessDescription: (planName: string) => 
+      subscriptionSuccessful:
+        enTranslations.payment.messages.subscriptionSuccessful,
+      subscriptionSuccessDescription: (planName: string) =>
         `You're now on the ${planName} plan.`,
     },
   },
@@ -114,11 +116,11 @@ export const translations = {
 
 // Helper function to get nested translation with type safety (for backward compatibility)
 export function getTranslation(path: string): string {
-  const keys = path.split('.');
+  const keys = path.split(".");
   let value: any = translations;
   for (const key of keys) {
     value = value?.[key];
     if (value === undefined) return path;
   }
-  return typeof value === 'string' ? value : path;
+  return typeof value === "string" ? value : path;
 }

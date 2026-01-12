@@ -9,7 +9,7 @@ import Home from "@/pages/user/Home";
 import Posts from "@/pages/user/Posts";
 import PostDetail from "@/pages/user/PostDetail";
 
-// TODO: 
+// TODO:
 // This will be connected with STRIPE payments
 import Payment from "@/pages/user/Payment";
 // Hidden Admin pages

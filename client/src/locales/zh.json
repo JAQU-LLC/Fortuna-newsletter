@@ -10,11 +10,7 @@
         "price": "$0",
         "period": "/月",
         "description": "開始使用交易提醒",
-        "features": [
-          "每週簡報",
-          "訪問公開文章",
-          "Discord公共頻道訪問"
-        ],
+        "features": ["每週簡報", "訪問公開文章", "Discord公共頻道訪問"],
         "cta": "開始使用"
       },
       "standard": {
@@ -22,11 +18,7 @@
         "price": "$0",
         "period": "/月",
         "description": "適合希望獲得交易優勢的交易愛好者",
-        "features": [
-          "免費版的所有功能",
-          "每日簡報",
-          "Discord特定私人頻道訪問"
-        ],
+        "features": ["免費版的所有功能", "每日簡報", "Discord特定私人頻道訪問"],
         "cta": "訂閱"
       },
       "premium": {
@@ -89,30 +81,17 @@
       "free": {
         "name": "免費",
         "price": "$0/月",
-        "features": [
-          "每週簡報",
-          "訪問公開文章",
-          "社區更新"
-        ]
+        "features": ["每週簡報", "訪問公開文章", "社區更新"]
       },
       "standard": {
         "name": "標準",
         "price": "$9/月",
-        "features": [
-          "每日 AI 簡報",
-          "獨家分析",
-          "月度網絡研討會"
-        ]
+        "features": ["每日 AI 簡報", "獨家分析", "月度網絡研討會"]
       },
       "premium": {
         "name": "高級",
         "price": "$29/月",
-        "features": [
-          "私人 Discord",
-          "一對一通話",
-          "定制研究",
-          "團隊席位"
-        ]
+        "features": ["私人 Discord", "一對一通話", "定制研究", "團隊席位"]
       }
     },
     "messages": {

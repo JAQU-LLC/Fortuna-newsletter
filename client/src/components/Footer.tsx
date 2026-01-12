@@ -1,6 +1,6 @@
-import { Link } from 'wouter';
-import { Linkedin, Instagram, Mail } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
+import { Link } from "wouter";
+import { Linkedin, Instagram, Mail } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export function Footer() {
   const { t } = useTranslation();
@@ -20,7 +20,7 @@ export function Footer() {
                   rel="noopener noreferrer"
                 >
                   <Linkedin className="w-4 h-4" />
-                  {t('footer.social.linkedin')}
+                  {t("footer.social.linkedin")}
                 </a>
               </li>
               <li>
@@ -31,7 +31,7 @@ export function Footer() {
                   rel="noopener noreferrer"
                 >
                   <Instagram className="w-4 h-4" />
-                  {t('footer.social.instagram')}
+                  {t("footer.social.instagram")}
                 </a>
               </li>
               <li>
@@ -42,7 +42,7 @@ export function Footer() {
                   rel="noopener noreferrer"
                 >
                   <Mail className="w-4 h-4" />
-                  {t('footer.social.creator')}
+                  {t("footer.social.creator")}
                 </a>
               </li>
             </ul>
@@ -56,7 +56,7 @@ export function Footer() {
                   href="/privacy"
                   className="text-sm opacity-70 hover:opacity-100 transition-opacity block"
                 >
-                  {t('footer.legal.privacyPolicy')}
+                  {t("footer.legal.privacyPolicy")}
                 </Link>
               </li>
               <li>
@@ -64,7 +64,7 @@ export function Footer() {
                   href="/terms"
                   className="text-sm opacity-70 hover:opacity-100 transition-opacity block"
                 >
-                  {t('footer.legal.termsOfUse')}
+                  {t("footer.legal.termsOfUse")}
                 </Link>
               </li>
             </ul>
@@ -73,18 +73,20 @@ export function Footer() {
           <div>
             <h3 className="font-display text-lg font-semibold mb-4">About</h3>
             <p className="text-sm opacity-70 leading-relaxed">
-              Gain an edge with fast, accurate US stock insights & alerts, insider trading, congress trading delivered straight to your inbox, daily discord alerts for trading opportunities, and backtested strategies with alpha.
+              Gain an edge with fast, accurate US stock insights & alerts,
+              insider trading, congress trading delivered straight to your
+              inbox, daily discord alerts for trading opportunities, and
+              backtested strategies with alpha.
             </p>
           </div>
         </div>
 
         <div className="border-t border-secondary-foreground/20 pt-8">
           <p className="text-sm text-center opacity-70">
-            {t('footer.copyright')}
+            {t("footer.copyright")}
           </p>
         </div>
       </div>
     </footer>
   );
 }
-

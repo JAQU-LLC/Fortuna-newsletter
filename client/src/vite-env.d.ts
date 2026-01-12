@@ -2,7 +2,7 @@
 
 /**
  * Type definitions for Vite environment variables
- * 
+ *
  * Vite only exposes environment variables prefixed with VITE_ to the client
  * for security reasons. This file provides TypeScript type definitions.
  */
@@ -18,4 +18,3 @@ interface ImportMetaEnv {
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
-

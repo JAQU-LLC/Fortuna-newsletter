@@ -1,10 +1,10 @@
-import { createLogger } from './logger';
+import { createLogger } from "./logger";
 
-const log = createLogger('Config');
+const log = createLogger("Config");
 
 /**
  * Configuration utilities for environment variables
- * 
+ *
  * Vite only exposes environment variables prefixed with VITE_ to the client
  * All environment variables must be accessed through import.meta.env.VITE_*
  */
@@ -19,9 +19,9 @@ export function getApiUrl(): string {
   // In development mode, use relative URLs (they'll be proxied by Vite)
   // In production, use VITE_API_URL if set
   const isDev = import.meta.env.DEV;
-  const apiUrl = isDev ? '' : (import.meta.env.VITE_API_URL || '');
-  
-  log.debug('API URL configured', { isDev, hasApiUrl: !!apiUrl });
+  const apiUrl = isDev ? "" : import.meta.env.VITE_API_URL || "";
+
+  log.debug("API URL configured", { isDev, hasApiUrl: !!apiUrl });
   return apiUrl;
 }
 
@@ -33,22 +33,21 @@ export function getApiUrl(): string {
  */
 export function getApiEndpoint(path: string): string {
   // Remove leading slash if present, we'll add it consistently
-  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
-  
+  const cleanPath = path.startsWith("/") ? path.slice(1) : path;
+
   // Prepend /api/newsletter prefix
   const fullPath = `/api/newsletter/${cleanPath}`;
-  
+
   const baseUrl = getApiUrl();
-  
+
   if (!baseUrl) {
     // No base URL set, use relative path with /api/newsletter prefix
     return fullPath;
   }
-  
+
   // Base URL is set, construct full URL
-  const cleanBaseUrl = baseUrl.replace(/\/$/, ''); // Remove trailing slash
+  const cleanBaseUrl = baseUrl.replace(/\/$/, ""); // Remove trailing slash
   const finalUrl = `${cleanBaseUrl}${fullPath}`;
-  
+
   return finalUrl;
 }
-
