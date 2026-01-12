@@ -28,12 +28,12 @@ export default function Terms() {
               <p>
                 By accessing, browsing, or using the Fortuna.ai newsletter
                 platform, website, mobile application, or any related services
-                (collectively, the "Service"), you acknowledge that you have
+                (collectively, the &quot;Service&quot;), you acknowledge that you have
                 read, understood, and agree to be bound by these Terms of Use
-                ("Terms") and our Privacy Policy. These Terms constitute a
-                legally binding agreement between you ("User," "you," or "your")
+                (&quot;Terms&quot;) and our Privacy Policy. These Terms constitute a
+                legally binding agreement between you (&quot;User,&quot; &quot;you,&quot; or &quot;your&quot;)
                 and Fortuna.ai, its affiliates, subsidiaries, and parent
-                companies (collectively, "Company," "we," "us," or "our").
+                companies (collectively, &quot;Company,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;).
               </p>
               <p className="mt-4">
                 IF YOU DO NOT AGREE TO THESE TERMS, YOU MUST IMMEDIATELY
@@ -62,7 +62,7 @@ export default function Terms() {
               <p className="mt-4">
                 All content, data, information, analysis, opinions, trading
                 alerts, market insights, and materials provided through the
-                Service (collectively, "Content") are provided for informational
+                Service (collectively, &quot;Content&quot;) are provided for informational
                 and educational purposes only. The Content does not constitute,
                 and should not be construed as:
               </p>
@@ -305,7 +305,7 @@ export default function Terms() {
                 </li>
                 <li>
                   Attempts to gain unauthorized access to our systems, networks,
-                  or other users' accounts
+                  or other users&apos; accounts
                 </li>
                 <li>
                   Interferes with or disrupts the Service, servers, or networks
@@ -339,8 +339,8 @@ export default function Terms() {
                 7. Disclaimer of Warranties
               </h2>
               <p className="font-semibold">
-                THE SERVICE AND CONTENT ARE PROVIDED "AS IS," "AS AVAILABLE,"
-                AND "WITH ALL FAULTS" WITHOUT WARRANTIES OF ANY KIND, EITHER
+                THE SERVICE AND CONTENT ARE PROVIDED &quot;AS IS,&quot; &quot;AS AVAILABLE,&quot;
+                AND &quot;WITH ALL FAULTS&quot; WITHOUT WARRANTIES OF ANY KIND, EITHER
                 EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO:
               </p>
               <ul className="list-disc list-inside space-y-2 ml-4 mt-4">
@@ -448,7 +448,7 @@ export default function Terms() {
                 subsidiaries, successors, assigns, licensors, and service
                 providers from and against any and all claims, demands,
                 liabilities, damages, losses, costs, expenses (including
-                reasonable attorneys' fees and legal costs), and other
+                reasonable attorneys&apos; fees and legal costs), and other
                 obligations arising from or related to:
               </p>
               <ul className="list-disc list-inside space-y-2 ml-4 mt-4">
@@ -634,7 +634,7 @@ export default function Terms() {
                 We reserve the right to modify, update, or replace these Terms
                 at any time, in our sole discretion. Material changes will be
                 effective immediately upon posting on this page, and we will
-                update the "Last updated" date. Your continued use of the
+                update the &quot;Last updated&quot; date. Your continued use of the
                 Service after such modifications constitutes your acceptance of
                 the updated Terms. If you do not agree to the modified Terms,
                 you must discontinue use of the Service immediately.

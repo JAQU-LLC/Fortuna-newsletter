@@ -26,12 +26,12 @@ export default function Privacy() {
                 1. Introduction and Data Controller
               </h2>
               <p>
-                Fortuna.ai ("we," "our," "us," or "Company") is committed to
+                Fortuna.ai (&quot;we,&quot; &quot;our,&quot; &quot;us,&quot; or &quot;Company&quot;) is committed to
                 protecting your privacy and personal information. This Privacy
                 Policy explains how we collect, use, disclose, process, store,
                 and safeguard your information when you visit our website, use
                 our mobile application, subscribe to our newsletter platform, or
-                interact with our services (collectively, the "Service").
+                interact with our services (collectively, the &quot;Service&quot;).
               </p>
               <p className="mt-4">
                 <strong>Data Controller:</strong> Fortuna.ai is the data
@@ -506,7 +506,7 @@ export default function Privacy() {
               </h3>
               <p>
                 You can opt-out of marketing emails by clicking the
-                "unsubscribe" link in any marketing email or by updating your
+                &quot;unsubscribe&quot; link in any marketing email or by updating your
                 email preferences in your account settings. Note that you may
                 still receive transactional and administrative emails related to
                 your account and subscription.
@@ -515,7 +515,7 @@ export default function Privacy() {
 
             <section>
               <h2 className="font-display text-2xl font-semibold mb-4 text-foreground">
-                7. Children's Privacy
+                7. Children&apos;s Privacy
               </h2>
               <p>
                 The Service is not intended for children under the age of 13 (or
@@ -529,7 +529,7 @@ export default function Privacy() {
               <p className="mt-4">
                 If you are a parent or guardian and believe your child has
                 provided us with personal information, please contact us at
-                privacy@fortuna.ai. We comply with the Children's Online Privacy
+                privacy@fortuna.ai. We comply with the Children&apos;s Online Privacy
                 Protection Act (COPPA) and applicable regulations.
               </p>
             </section>
@@ -649,7 +649,7 @@ export default function Privacy() {
                 12. Do Not Track Signals
               </h2>
               <p>
-                Some browsers transmit "Do Not Track" (DNT) signals. We do not
+                Some browsers transmit &quot;Do Not Track&quot; (DNT) signals. We do not
                 currently respond to DNT signals because there is no industry
                 standard for doing so. We continue to monitor developments in
                 this area.
@@ -664,7 +664,7 @@ export default function Privacy() {
                 We may update this Privacy Policy from time to time to reflect
                 changes in our practices, technology, legal requirements, or
                 other factors. Material changes will be effective immediately
-                upon posting on this page, and we will update the "Last updated"
+                upon posting on this page, and we will update the &quot;Last updated&quot;
                 date. We may also notify you of material changes via email or
                 through the Service.
               </p>
