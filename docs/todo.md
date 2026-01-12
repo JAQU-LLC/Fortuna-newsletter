@@ -7,9 +7,8 @@
     GitHub secrets (required): VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID (for authentication).
     Vercel dashboard: Application env vars (e.g., VITE_API_URL) are pulled via vercel pull.
 
-
-
 # Deployment
+
 Repository secrets (recommended)
 The workflow doesn't specify a GitHub Environment, so it can't access Environment secrets.
 Simpler: one place to manage secrets.

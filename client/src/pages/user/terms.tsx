@@ -28,12 +28,14 @@ export default function Terms() {
               <p>
                 By accessing, browsing, or using the Fortuna.ai newsletter
                 platform, website, mobile application, or any related services
-                (collectively, the &quot;Service&quot;), you acknowledge that you have
-                read, understood, and agree to be bound by these Terms of Use
-                (&quot;Terms&quot;) and our Privacy Policy. These Terms constitute a
-                legally binding agreement between you (&quot;User,&quot; &quot;you,&quot; or &quot;your&quot;)
-                and Fortuna.ai, its affiliates, subsidiaries, and parent
-                companies (collectively, &quot;Company,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;).
+                (collectively, the &quot;Service&quot;), you acknowledge that
+                you have read, understood, and agree to be bound by these Terms
+                of Use (&quot;Terms&quot;) and our Privacy Policy. These Terms
+                constitute a legally binding agreement between you
+                (&quot;User,&quot; &quot;you,&quot; or &quot;your&quot;) and
+                Fortuna.ai, its affiliates, subsidiaries, and parent companies
+                (collectively, &quot;Company,&quot; &quot;we,&quot;
+                &quot;us,&quot; or &quot;our&quot;).
               </p>
               <p className="mt-4">
                 IF YOU DO NOT AGREE TO THESE TERMS, YOU MUST IMMEDIATELY
@@ -62,9 +64,9 @@ export default function Terms() {
               <p className="mt-4">
                 All content, data, information, analysis, opinions, trading
                 alerts, market insights, and materials provided through the
-                Service (collectively, &quot;Content&quot;) are provided for informational
-                and educational purposes only. The Content does not constitute,
-                and should not be construed as:
+                Service (collectively, &quot;Content&quot;) are provided for
+                informational and educational purposes only. The Content does
+                not constitute, and should not be construed as:
               </p>
               <ul className="list-disc list-inside space-y-2 ml-4 mt-4">
                 <li>Financial, investment, legal, tax, or accounting advice</li>
@@ -339,9 +341,10 @@ export default function Terms() {
                 7. Disclaimer of Warranties
               </h2>
               <p className="font-semibold">
-                THE SERVICE AND CONTENT ARE PROVIDED &quot;AS IS,&quot; &quot;AS AVAILABLE,&quot;
-                AND &quot;WITH ALL FAULTS&quot; WITHOUT WARRANTIES OF ANY KIND, EITHER
-                EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO:
+                THE SERVICE AND CONTENT ARE PROVIDED &quot;AS IS,&quot; &quot;AS
+                AVAILABLE,&quot; AND &quot;WITH ALL FAULTS&quot; WITHOUT
+                WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING BUT
+                NOT LIMITED TO:
               </p>
               <ul className="list-disc list-inside space-y-2 ml-4 mt-4">
                 <li>
@@ -634,9 +637,9 @@ export default function Terms() {
                 We reserve the right to modify, update, or replace these Terms
                 at any time, in our sole discretion. Material changes will be
                 effective immediately upon posting on this page, and we will
-                update the &quot;Last updated&quot; date. Your continued use of the
-                Service after such modifications constitutes your acceptance of
-                the updated Terms. If you do not agree to the modified Terms,
+                update the &quot;Last updated&quot; date. Your continued use of
+                the Service after such modifications constitutes your acceptance
+                of the updated Terms. If you do not agree to the modified Terms,
                 you must discontinue use of the Service immediately.
               </p>
               <p className="mt-4">
