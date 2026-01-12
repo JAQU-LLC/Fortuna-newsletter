@@ -23,18 +23,9 @@
       "heading": "Inter"
     },
     "fontStacks": {
-      "body": [
-        "Inter",
-        "sans-serif"
-      ],
-      "heading": [
-        "Inter",
-        "sans-serif"
-      ],
-      "paragraph": [
-        "Inter",
-        "sans-serif"
-      ]
+      "body": ["Inter", "sans-serif"],
+      "heading": ["Inter", "sans-serif"],
+      "paragraph": ["Inter", "sans-serif"]
     },
     "fontSizes": {
       "h1": "72px",

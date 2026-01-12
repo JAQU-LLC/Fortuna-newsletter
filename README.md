@@ -38,24 +38,25 @@ A modern newsletter subscription platform built with React, TypeScript, and Tail
 ### Getting Started
 
 1. **Clone the repository**
+
    ```bash
    git clone <your-repo-url>
    cd fortuna-newsletter
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Environment variables**
-   
+
    The project uses a single `.env` file for local development:
-   
    - **`.env`** - Local development configuration (committed to git)
    - Pre-configured with `VITE_API_URL=http://localhost:8000` for local development
-   
-   **Note**: 
+
+   **Note**:
    - The `.env` file is committed to git as a template for local development
    - Environment variables must be prefixed with `VITE_` to be exposed to the client
    - For production, set environment variables in your deployment platform (Vercel, Netlify, etc.)
@@ -63,6 +64,7 @@ A modern newsletter subscription platform built with React, TypeScript, and Tail
    - See [Environment Variables](#environment-variables) section for more details
 
 4. **Start the development server**
+
    ```bash
    npm run dev
    ```
@@ -72,16 +74,16 @@ A modern newsletter subscription platform built with React, TypeScript, and Tail
 
 ### Available Scripts
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start development server on port 5000 |
-| `npm run build` | Build for production (outputs to `dist/public/`) |
-| `npm run check` | Run TypeScript type checking |
-| `npm run preview` | Preview production build locally |
-| `npm run lint` | Run ESLint to check for code issues |
-| `npm run lint:fix` | Auto-fix ESLint issues where possible |
-| `npm run format` | Format code with Prettier |
-| `npm run format:check` | Check code formatting without making changes |
+| Command                | Description                                      |
+| ---------------------- | ------------------------------------------------ |
+| `npm run dev`          | Start development server on port 5000            |
+| `npm run build`        | Build for production (outputs to `dist/public/`) |
+| `npm run check`        | Run TypeScript type checking                     |
+| `npm run preview`      | Preview production build locally                 |
+| `npm run lint`         | Run ESLint to check for code issues              |
+| `npm run lint:fix`     | Auto-fix ESLint issues where possible            |
+| `npm run format`       | Format code with Prettier                        |
+| `npm run format:check` | Check code formatting without making changes     |
 
 ## Project Structure
 
@@ -143,22 +145,23 @@ A modern newsletter subscription platform built with React, TypeScript, and Tail
 
 ## Pages & Routes
 
-| Route | Description |
-|------|-------------|
-| `/` | Home page with subscription plans |
-| `/posts` | Public posts listing |
-| `/posts/:id` | Individual post detail page |
-| `/payment?plan=<id>` | Payment/checkout page |
-| `/privacy` | Privacy Policy page |
-| `/terms` | Terms of Use page |
-| `/admin` | Admin login |
-| `/admin/dashboard` | Admin dashboard |
+| Route                | Description                       |
+| -------------------- | --------------------------------- |
+| `/`                  | Home page with subscription plans |
+| `/posts`             | Public posts listing              |
+| `/posts/:id`         | Individual post detail page       |
+| `/payment?plan=<id>` | Payment/checkout page             |
+| `/privacy`           | Privacy Policy page               |
+| `/terms`             | Terms of Use page                 |
+| `/admin`             | Admin login                       |
+| `/admin/dashboard`   | Admin dashboard                   |
 
 ## Admin Access
 
 The admin panel is accessible at `/admin` and requires authentication via the FastAPI backend.
 
 **Authentication Flow**:
+
 - Login at `/admin` using admin credentials
 - Backend returns JWT access and refresh tokens
 - Tokens are stored (access token in sessionStorage, refresh token in localStorage)
@@ -167,6 +170,7 @@ The admin panel is accessible at `/admin` and requires authentication via the Fa
 - Logout clears tokens and redirects to login
 
 **Admin Features**:
+
 - Full CRUD operations for posts (create, edit, delete)
 - Markdown editor for post content
 - Subscriber management (view, toggle status, change plan)
@@ -222,24 +226,26 @@ The project uses Vite's environment variable system following [Vite's official b
 
 The project uses a single `.env` file for local development:
 
-| File | When Loaded | Git Status | Purpose |
-|------|-------------|------------|---------|
+| File   | When Loaded        | Git Status   | Purpose                         |
+| ------ | ------------------ | ------------ | ------------------------------- |
 | `.env` | Always (local dev) | ✅ Committed | Local development configuration |
 
-**Note**: 
+**Note**:
+
 - `.env` is used for local development only
 - Production environment variables are set via deployment platform (Vercel, Netlify, etc.)
 - Vite also supports `.env.local` for local overrides (gitignored)
 
 ### Available Variables
 
-| Variable | Description | Example |
-|----------|-------------|---------|
+| Variable       | Description          | Example                                                          |
+| -------------- | -------------------- | ---------------------------------------------------------------- |
 | `VITE_API_URL` | Backend API base URL | `http://localhost:8000` (dev) or `https://api.fortuna.ai` (prod) |
 
 ### File Example
 
 **`.env`** (local development - committed):
+
 ```bash
 # Local development environment variables
 # This file is used for local development only
@@ -252,13 +258,13 @@ VITE_API_URL=http://localhost:8000
 Environment variables are accessed through the `config.ts` utility:
 
 ```typescript
-import { getApiUrl, getApiEndpoint } from '@/lib/config';
+import { getApiUrl, getApiEndpoint } from "@/lib/config";
 
 // Get the base API URL (reads from .env for local dev, or deployment platform for production)
-const apiUrl = getApiUrl(); 
+const apiUrl = getApiUrl();
 
 // Get a full API endpoint URL
-const loginUrl = getApiEndpoint('/api/auth/login');
+const loginUrl = getApiEndpoint("/api/auth/login");
 // Local dev: http://localhost:8000/api/auth/login (from .env)
 // Production: https://api.fortuna.ai/api/auth/login (from deployment platform)
 // If empty: /api/auth/login (relative URL)
@@ -278,6 +284,7 @@ The API client in `client/src/lib/api-client.ts` automatically uses the configur
 For production deployments (Vercel, Netlify, etc.), set environment variables in your hosting platform's dashboard. These will override `.env` during build.
 
 **Vercel Example**:
+
 1. Go to Project Settings → Environment Variables
 2. Add `VITE_API_URL` with your production backend URL (e.g., `https://api.fortuna.ai`)
 3. Select environment (Production, Preview, Development)
@@ -292,6 +299,7 @@ This frontend is fully integrated with a FastAPI backend using React Query (`@ta
 ### API Client Architecture
 
 **Centralized API Client** (`client/src/lib/api-client.ts`):
+
 - Handles all backend API calls
 - Manages authentication tokens (JWT access and refresh tokens)
 - Automatic token refresh on 401 responses
@@ -299,12 +307,14 @@ This frontend is fully integrated with a FastAPI backend using React Query (`@ta
 - Error handling and token management
 
 **React Query Hooks** (`client/src/hooks/`):
+
 - `useAuth.ts` - Authentication hooks (login, logout, current user, admin check)
 - `usePosts.ts` - Post CRUD operations (list, get, create, update, delete)
 - `useSubscribers.ts` - Subscriber management (list, create, update, delete)
 - `useSubscriptions.ts` - Subscription creation
 
 **Query Fetch Behavior**:
+
 - All queries fetch **only once on initial load**
 - Subsequent component mounts use cached data (no API calls)
 - Optimistic updates for mutations (instant UI feedback)
@@ -312,6 +322,7 @@ This frontend is fully integrated with a FastAPI backend using React Query (`@ta
 - See [Query Fetch Behavior Documentation](docs/QUERY_FETCH_BEHAVIOR.md) for details
 
 **API Configuration**:
+
 - All API requests use the `VITE_API_URL` environment variable for the backend base URL
 - API endpoints are automatically prefixed with `/api/newsletter`
 - If `VITE_API_URL` is not set, API calls use relative URLs (same origin)
@@ -320,6 +331,7 @@ This frontend is fully integrated with a FastAPI backend using React Query (`@ta
 ### Data Models
 
 Frontend models (`client/src/models/`) match the backend MongoDB schema:
+
 - **Post**: `id`, `title`, `content` (markdown), `excerpt`, `createdAt`, `published`
 - **Subscriber**: `_id`, `email`, `name`, `is_active`, `plan_id`, `subscribed_at`, `unsubscribed_at`
 
@@ -332,6 +344,7 @@ For detailed deployment instructions, see [Deployment Strategy](docs/DEPLOYMENT_
 ### Quick Deploy to Vercel (Recommended)
 
 1. **Build the project**
+
    ```bash
    npm run build
    ```
@@ -384,10 +397,10 @@ The design system uses CSS custom properties defined in `index.css`:
 
 ```css
 :root {
-  --primary: 238 100% 64%;      /* Brand blue-purple */
-  --secondary: 235 88% 13%;      /* Dark navy */
-  --background: 0 0% 100%;       /* White */
-  --foreground: 235 88% 13%;     /* Text color */
+  --primary: 238 100% 64%; /* Brand blue-purple */
+  --secondary: 235 88% 13%; /* Dark navy */
+  --background: 0 0% 100%; /* White */
+  --foreground: 235 88% 13%; /* Text color */
 }
 ```
 
@@ -405,9 +418,9 @@ To add a new language or modify text:
 All data fetching uses React Query hooks for optimal performance and caching:
 
 ```typescript
-import { usePosts, usePost, useCreatePost } from '@/hooks/usePosts';
-import { useSubscribers } from '@/hooks/useSubscribers';
-import { useCurrentUser, useIsAdmin } from '@/hooks/useAuth';
+import { usePosts, usePost, useCreatePost } from "@/hooks/usePosts";
+import { useSubscribers } from "@/hooks/useSubscribers";
+import { useCurrentUser, useIsAdmin } from "@/hooks/useAuth";
 
 // List posts (fetches once, uses cache afterward)
 const { data: postsData, isLoading, error } = usePosts(true); // published only
@@ -425,6 +438,7 @@ const isAdmin = useIsAdmin();
 ```
 
 **Key Behavior**:
+
 - Queries fetch **only once on initial load** (see [Query Fetch Behavior](docs/QUERY_FETCH_BEHAVIOR.md))
 - Subsequent component mounts use cached data (no API calls)
 - Mutations provide optimistic updates for instant UI feedback

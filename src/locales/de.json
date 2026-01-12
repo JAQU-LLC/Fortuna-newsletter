@@ -1,0 +1,246 @@
+{
+  "home": {
+    "badge": "KI-gestützte Trading-Erkenntnisse für US-Aktien",
+    "title": "Gewinnen Sie einen Trading-Vorteil mit",
+    "titleBrand": "Fortuna.ai",
+    "description": "",
+    "plans": {
+      "free": {
+        "name": "Kostenlos",
+        "price": "$0",
+        "period": "/Monat",
+        "description": "Beginnen Sie mit Trading-Benachrichtigungen",
+        "features": [
+          "Wöchentlicher Newsletter",
+          "Zugang zu öffentlichen Beiträgen",
+          "Discord-Zugang in öffentlichen Kanälen"
+        ],
+        "cta": "Loslegen"
+      },
+      "standard": {
+        "name": "Standard",
+        "price": "$0",
+        "period": "/Monat",
+        "description": "Für Trading-Enthusiasten, die einen Vorteil erlangen möchten",
+        "features": [
+          "Alles aus Kostenlos",
+          "Täglicher Newsletter",
+          "Discord-Zugang in bestimmten privaten Kanälen"
+        ],
+        "cta": "Abonnieren"
+      },
+      "premium": {
+        "name": "Premium",
+        "price": "$0",
+        "period": "/Monat",
+        "description": "Vollzugriff auf alles",
+        "features": [
+          "Alles aus Standard",
+          "Discord-Zugang zu allen Kanälen",
+          "KI-Agenten zur Analyse von Aktien- / Markttrends"
+        ],
+        "cta": "Zu Premium wechseln"
+      }
+    },
+    "mostPopular": "Beliebteste"
+  },
+  "posts": {
+    "title": "Neueste Beiträge",
+    "description": "Erkunden Sie unsere Sammlung von KI-Erkenntnissen, Branchenanalysen und praktischen Leitfäden.",
+    "readMore": "Mehr lesen",
+    "noPosts": "Noch keine Beiträge. Schauen Sie bald wieder vorbei!",
+    "backToPosts": "Zurück zu Beiträgen"
+  },
+  "payment": {
+    "backToPlans": "Zurück zu Plänen",
+    "title": "Vervollständigen Sie Ihr Abonnement",
+    "labels": {
+      "fullName": "Vollständiger Name",
+      "email": "E-Mail",
+      "paymentDetails": "Zahlungsdetails",
+      "cardNumber": "Kartennummer",
+      "expiry": "Ablaufdatum",
+      "cvc": "CVC"
+    },
+    "placeholders": {
+      "name": "Max Mustermann",
+      "email": "max@beispiel.de",
+      "cardNumber": "4242 4242 4242 4242",
+      "expiry": "MM/JJ",
+      "cvc": "123"
+    },
+    "buttons": {
+      "processing": "Wird verarbeitet...",
+      "startFreePlan": "Kostenlosen Plan starten",
+      "subscribe": "Zahlen {{price}}"
+    },
+    "secureCheckout": "Sicherer Checkout bereitgestellt von Stripe",
+    "orderSummary": {
+      "title": "Bestellübersicht",
+      "monthlySubscription": "Monatliches Abonnement",
+      "total": "Gesamt"
+    },
+    "success": {
+      "title": "Willkommen bei Fortuna.ai!",
+      "message": "Willkommen, {{username}}! Ihr {{planName}} Abonnement ist jetzt aktiv. Überprüfen Sie Ihre E-Mail zur Bestätigung.",
+      "viewPosts": "Beiträge ansehen"
+    },
+    "planDetails": {
+      "free": {
+        "name": "Kostenlos",
+        "price": "$0/Monat",
+        "features": [
+          "Wöchentlicher Newsletter",
+          "Zugang zu öffentlichen Beiträgen",
+          "Community-Updates"
+        ]
+      },
+      "standard": {
+        "name": "Standard",
+        "price": "$9/Monat",
+        "features": [
+          "Tägliche KI-Zusammenfassungen",
+          "Exklusive Analyse",
+          "Monatliche Webinare"
+        ]
+      },
+      "premium": {
+        "name": "Premium",
+        "price": "$29/Monat",
+        "features": [
+          "Privater Discord",
+          "1-zu-1 Anrufe",
+          "Individuelle Recherche",
+          "Team-Plätze"
+        ]
+      }
+    },
+    "messages": {
+      "fillRequiredFields": "Bitte füllen Sie alle erforderlichen Felder aus",
+      "enterPaymentDetails": "Bitte geben Sie die Zahlungsdetails ein",
+      "subscriptionSuccessful": "Abonnement erfolgreich!",
+      "subscriptionSuccessDescription": "Sie sind jetzt im {{planName}} Plan.",
+      "paymentComingSoon": "Zahlung Demnächst Verfügbar",
+      "stripeIntegration": "Die Stripe-Zahlungsintegration wird derzeit entwickelt. Bitte schauen Sie bald wieder vorbei für {{planName}} Plan-Abonnements!"
+    }
+  },
+  "admin": {
+    "login": {
+      "backToHome": "Zurück zur Startseite",
+      "title": "Admin-Anmeldung",
+      "description": "Melden Sie sich an, um auf das Admin-Dashboard zuzugreifen",
+      "labels": {
+        "username": "Benutzername",
+        "password": "Passwort"
+      },
+      "placeholders": {
+        "username": "Benutzername eingeben",
+        "password": "Passwort eingeben"
+      },
+      "signIn": "Anmelden",
+      "restricted": "Dieser Bereich ist nur für Administratoren zugänglich.",
+      "messages": {
+        "welcomeBack": "Willkommen zurück!",
+        "loggedInAsAdmin": "Sie sind jetzt als Administrator angemeldet.",
+        "invalidCredentials": "Ungültige Anmeldedaten",
+        "checkCredentials": "Bitte überprüfen Sie Ihren Benutzernamen und Ihr Passwort."
+      }
+    },
+    "dashboard": {
+      "title": "Admin-Dashboard",
+      "viewSite": "Website ansehen",
+      "logout": "Abmelden",
+      "stats": {
+        "totalSubscribers": "Gesamte Abonnenten",
+        "activeSubscribers": "Aktive Abonnenten",
+        "publishedPosts": "Veröffentlichte Beiträge"
+      },
+      "tabs": {
+        "write": "Beitrag schreiben",
+        "users": "Abonnenten",
+        "plans": "Planeinstellungen"
+      },
+      "plans": {
+        "title": "Plan-Konfiguration",
+        "mostPopular": "Beliebtester Plan",
+        "disabledPlans": "Deaktivierte Pläne",
+        "save": "Planeinstellungen speichern",
+        "saved": "Planeinstellungen erfolgreich gespeichert!",
+        "plans": {
+          "free": "Kostenlos",
+          "standard": "Standard",
+          "premium": "Premium"
+        }
+      },
+      "writePost": {
+        "title": "Neuen Beitrag erstellen",
+        "labels": {
+          "postTitle": "Beitragstitel",
+          "postContent": "Beitragsinhalt"
+        },
+        "placeholders": {
+          "title": "Beitragstitel eingeben...",
+          "content": "Schreiben Sie Ihren Beitragsinhalt hier..."
+        },
+        "publish": "Beitrag veröffentlichen",
+        "markdownHint": "Sie können Markdown-Formatierung verwenden. Klicken Sie auf das Augen-Symbol, um eine Vorschau anzuzeigen.",
+        "messages": {
+          "fillAllFields": "Bitte füllen Sie alle Felder aus",
+          "postPublished": "Beitrag veröffentlicht!",
+          "postLive": "Ihr Beitrag ist jetzt live."
+        }
+      },
+      "subscribers": {
+        "title": "Abonnenten verwalten",
+        "searchPlaceholder": "Nach E-Mail suchen...",
+        "table": {
+          "name": "Name",
+          "email": "E-Mail",
+          "subscribed": "Abonniert",
+          "status": "Status",
+          "action": "Aktion"
+        },
+        "status": {
+          "active": "Aktiv",
+          "inactive": "Inaktiv"
+        },
+        "actions": {
+          "activate": "Aktivieren",
+          "deactivate": "Deaktivieren"
+        },
+        "noResults": "Keine Abonnenten gefunden, die Ihrer Suche entsprechen."
+      }
+    }
+  },
+  "common": {
+    "nav": {
+      "subscribe": "Abonnieren",
+      "posts": "Beiträge"
+    },
+    "buttons": {
+      "back": "Zurück"
+    },
+    "comingSoon": "Demnächst verfügbar"
+  },
+  "footer": {
+    "social": {
+      "linkedin": "LinkedIn",
+      "instagram": "Instagram",
+      "creator": "Ersteller"
+    },
+    "legal": {
+      "privacyPolicy": "Datenschutzrichtlinie",
+      "termsOfUse": "Nutzungsbedingungen"
+    },
+    "copyright": "© 2026 Fortuna.ai. Alle Rechte vorbehalten."
+  },
+  "notFound": {
+    "title": "404 Seite Nicht Gefunden",
+    "message": "Entschuldigung, diese Seite existiert nicht."
+  },
+  "postDetail": {
+    "backToPosts": "Zurück zu Beiträgen",
+    "notFound": "Beitrag nicht gefunden",
+    "notFoundMessage": "Der Beitrag, den Sie suchen, existiert nicht."
+  }
+}

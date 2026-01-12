@@ -1,0 +1,242 @@
+{
+  "home": {
+    "badge": "AI駆動の米国株取引インサイト",
+    "title": "以下の方法で取引の優位性を獲得",
+    "titleBrand": "Fortuna.ai",
+    "description": "",
+    "plans": {
+      "free": {
+        "name": "無料",
+        "price": "$0",
+        "period": "/月",
+        "description": "取引アラートで始める",
+        "features": [
+          "週次ニュースレター",
+          "公開投稿へのアクセス",
+          "Discordパブリックチャンネルへのアクセス"
+        ],
+        "cta": "始める"
+      },
+      "standard": {
+        "name": "スタンダード",
+        "price": "$0",
+        "period": "/月",
+        "description": "取引の優位性を獲得したい取引愛好家向け",
+        "features": [
+          "無料版のすべて",
+          "日次ニュースレター",
+          "Discord特定のプライベートチャンネルへのアクセス"
+        ],
+        "cta": "購読する"
+      },
+      "premium": {
+        "name": "プレミアム",
+        "price": "$0",
+        "period": "/月",
+        "description": "すべてへの完全アクセス",
+        "features": [
+          "スタンダード版のすべて",
+          "Discord全チャンネルへのアクセス",
+          "株価/市場トレンドを分析するAIエージェント"
+        ],
+        "cta": "プレミアムに進む"
+      }
+    },
+    "mostPopular": "最も人気"
+  },
+  "posts": {
+    "title": "最新の投稿",
+    "description": "AIインサイト、業界分析、実践的なガイドのコレクションを探索してください。",
+    "readMore": "続きを読む",
+    "noPosts": "まだ投稿がありません。後でもう一度ご確認ください！",
+    "backToPosts": "投稿に戻る"
+  },
+  "payment": {
+    "backToPlans": "プランに戻る",
+    "title": "購読を完了する",
+    "labels": {
+      "fullName": "氏名",
+      "email": "メールアドレス",
+      "paymentDetails": "支払い詳細",
+      "cardNumber": "カード番号",
+      "expiry": "有効期限",
+      "cvc": "CVC"
+    },
+    "placeholders": {
+      "name": "山田 太郎",
+      "email": "yamada@example.com",
+      "cardNumber": "4242 4242 4242 4242",
+      "expiry": "MM/YY",
+      "cvc": "123"
+    },
+    "buttons": {
+      "processing": "処理中...",
+      "startFreePlan": "無料プランを開始",
+      "subscribe": "{{price}}を支払う"
+    },
+    "secureCheckout": "Stripeによる安全なチェックアウト",
+    "orderSummary": {
+      "title": "注文概要",
+      "monthlySubscription": "月間購読",
+      "total": "合計"
+    },
+    "success": {
+      "title": "Fortuna.aiへようこそ！",
+      "message": "ようこそ、{{username}}さん！{{planName}}購読が有効になりました。確認のためメールを確認してください。",
+      "viewPosts": "投稿を見る"
+    },
+    "planDetails": {
+      "free": {
+        "name": "無料",
+        "price": "$0/月",
+        "features": [
+          "週次ニュースレター",
+          "公開投稿へのアクセス",
+          "コミュニティアップデート"
+        ]
+      },
+      "standard": {
+        "name": "スタンダード",
+        "price": "$9/月",
+        "features": ["日次AIブリーフィング", "独占分析", "月次ウェビナー"]
+      },
+      "premium": {
+        "name": "プレミアム",
+        "price": "$29/月",
+        "features": [
+          "プライベートDiscord",
+          "1対1の通話",
+          "カスタムリサーチ",
+          "チームシート"
+        ]
+      }
+    },
+    "messages": {
+      "fillRequiredFields": "すべての必須項目を入力してください",
+      "enterPaymentDetails": "支払い詳細を入力してください",
+      "subscriptionSuccessful": "購読が成功しました！",
+      "subscriptionSuccessDescription": "{{planName}}プランになりました。",
+      "paymentComingSoon": "支払い近日公開",
+      "stripeIntegration": "Stripe決済の統合は開発中です。{{planName}}プランの購読については、後日またご確認ください！"
+    }
+  },
+  "admin": {
+    "login": {
+      "backToHome": "ホームに戻る",
+      "title": "管理者ログイン",
+      "description": "管理ダッシュボードにアクセスするためにログインしてください",
+      "labels": {
+        "username": "ユーザー名",
+        "password": "パスワード"
+      },
+      "placeholders": {
+        "username": "ユーザー名を入力",
+        "password": "パスワードを入力"
+      },
+      "signIn": "サインイン",
+      "restricted": "このエリアは管理者のみアクセス可能です。",
+      "messages": {
+        "welcomeBack": "おかえりなさい！",
+        "loggedInAsAdmin": "管理者としてログインしました。",
+        "invalidCredentials": "無効な認証情報",
+        "checkCredentials": "ユーザー名とパスワードを確認してください。"
+      }
+    },
+    "dashboard": {
+      "title": "管理ダッシュボード",
+      "viewSite": "サイトを見る",
+      "logout": "ログアウト",
+      "stats": {
+        "totalSubscribers": "総購読者数",
+        "activeSubscribers": "アクティブ購読者",
+        "publishedPosts": "公開された投稿"
+      },
+      "tabs": {
+        "write": "投稿を書く",
+        "users": "購読者",
+        "plans": "プラン設定"
+      },
+      "plans": {
+        "title": "プラン構成",
+        "mostPopular": "最も人気のあるプラン",
+        "disabledPlans": "無効化されたプラン",
+        "save": "プラン設定を保存",
+        "saved": "プラン設定が正常に保存されました！",
+        "plans": {
+          "free": "無料",
+          "standard": "スタンダード",
+          "premium": "プレミアム"
+        }
+      },
+      "writePost": {
+        "title": "新しい投稿を作成",
+        "labels": {
+          "postTitle": "投稿タイトル",
+          "postContent": "投稿内容"
+        },
+        "placeholders": {
+          "title": "投稿タイトルを入力...",
+          "content": "投稿内容をここに書いてください..."
+        },
+        "publish": "投稿を公開",
+        "markdownHint": "Markdownフォーマットを使用できます。目のアイコンをクリックしてプレビューしてください。",
+        "messages": {
+          "fillAllFields": "すべてのフィールドを入力してください",
+          "postPublished": "投稿が公開されました！",
+          "postLive": "投稿がライブになりました。"
+        }
+      },
+      "subscribers": {
+        "title": "購読者を管理",
+        "searchPlaceholder": "メールで検索...",
+        "table": {
+          "name": "名前",
+          "email": "メールアドレス",
+          "subscribed": "購読日",
+          "status": "ステータス",
+          "action": "アクション"
+        },
+        "status": {
+          "active": "アクティブ",
+          "inactive": "非アクティブ"
+        },
+        "actions": {
+          "activate": "有効化",
+          "deactivate": "無効化"
+        },
+        "noResults": "検索条件に一致する購読者が見つかりませんでした。"
+      }
+    }
+  },
+  "common": {
+    "nav": {
+      "subscribe": "購読",
+      "posts": "投稿"
+    },
+    "buttons": {
+      "back": "戻る"
+    },
+    "comingSoon": "近日公開"
+  },
+  "footer": {
+    "social": {
+      "linkedin": "LinkedIn",
+      "instagram": "Instagram",
+      "creator": "作成者"
+    },
+    "legal": {
+      "privacyPolicy": "プライバシーポリシー",
+      "termsOfUse": "利用規約"
+    },
+    "copyright": "© 2026 Fortuna.ai. 全著作権所有。"
+  },
+  "notFound": {
+    "title": "404 ページが見つかりません",
+    "message": "申し訳ございませんが、このページは存在しません。"
+  },
+  "postDetail": {
+    "backToPosts": "投稿に戻る",
+    "notFound": "投稿が見つかりません",
+    "notFoundMessage": "お探しの投稿は存在しません。"
+  }
+}
