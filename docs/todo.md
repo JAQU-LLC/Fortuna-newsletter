@@ -6,4 +6,7 @@ stripe integration into payment.tsx, we will not allow users to enter card detai
 
 
 
-
+3. Connecting to our real backend
+Environment variables
+GitHub secrets (required): VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID (for authentication).
+Vercel dashboard: Application env vars (e.g., VITE_API_URL) are pulled via vercel pull.

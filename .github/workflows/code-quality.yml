@@ -1,10 +1,7 @@
-name: Lint and Type Check
+name: Code Quality Checks
 
 on:
-  push:
-    branches: ["**"]
-  pull_request:
-    branches: ["**"]
+  workflow_call:  # Makes it reusable
 
 jobs:
   lint:
@@ -18,7 +15,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
           cache: "npm"
       
       - name: Install dependencies
@@ -26,6 +23,23 @@ jobs:
       
       - name: Run ESLint
         run: npm run lint
+
+  prettier:
+    name: Prettier Check
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: "npm"
+      
+      - name: Install dependencies
+        run: npm ci
       
       - name: Run Prettier check
         run: npm run format:check
@@ -41,7 +55,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
           cache: "npm"
       
       - name: Install dependencies
